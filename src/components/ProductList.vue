@@ -5,7 +5,7 @@
 <div class="catalog">
 <ul class="catalog__list">
     <li class="catalog__item" v-for="(product, index) in products" :key="index">
-        <a class="catalog__pic" :href="product.id">
+        <a class="catalog__pic" href="ProductItem.vue">
             <img :src="product.image" :alt="product.title">
         </a>
 
@@ -167,7 +167,7 @@ export default {
     display: flex;
     margin-top: auto
 }
-pagination {
+.pagination {
     margin: 0;
     padding: 0;
     list-style: none;

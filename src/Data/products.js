@@ -1,6 +1,3 @@
-const a = document.querySelector('catalog__item');
-console.log(a);
-
 export default [
   {
     id: 1,
