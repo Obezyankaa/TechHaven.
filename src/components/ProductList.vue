@@ -5,9 +5,11 @@
 <div class="catalog">
 <ul class="catalog__list">
     <li class="catalog__item" v-for="(product, index) in products" :key="index">
-        <a class="catalog__pic" href="ProductItem.vue">
+      <div id="test">
+        <a class="catalog__pic test2" href="ProductItem.vue">
             <img :src="product.image" :alt="product.title">
         </a>
+      </div>
 
         <h3 class="catalog__title">
             <a href="#">
@@ -102,6 +104,37 @@ export default {
 </script>
 
 <style>
+#test {
+    display: inline-block;
+}
+
+#test .test2 {
+    /* background: #000; */
+    /* У блока, оборачивающего картинку при наведении будет просвечивать черный фон */
+    overflow: hidden;
+    /* Ограничиваем видиую область */
+}
+
+#test .test2 img {
+    opacity: 1;
+    transition: opacity 124ms linear, transform 124ms linear;
+    /* Плавное изменение прозрачности и увеличения */
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Убираем полосу под картинкий */
+}
+
+#test:hover .test2 img {
+    opacity: 0.9;
+    /* Высветляем картинку, но она становится темнее, так как под ней черный фон */
+    transform: scale(1.05);
+    /* Увеличение картинки */
+}
+
+#test+#test .test2 {
+    background: #000;
+}
 .content__catalog {
     display: grid;
     grid-template-columns: 290px 1fr;

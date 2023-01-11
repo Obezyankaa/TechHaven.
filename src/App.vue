@@ -5,7 +5,7 @@
       <HeaderVue />
       <main class="content container">
         <ProductList :products="products" />
-        <ProductItemVue :productsItem="productsItem" />
+        <ProductItemVue :products="products" :productsItem="productsItem" />
       </main>
       <FooterVue />
     </section>

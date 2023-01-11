@@ -3,10 +3,10 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
     <section >
-        <div class="item" v-for="(productItem, index) in productsItem" :key="index">
+        <div class="item" :="products">
         <div class="item__pics pics">
             <div class="pics__wrapper">
-                <img width="570" height="570" :src="productItem.image"
+                <img width="570" height="570" :src="products[0].image"
                     alt="Название товара">
             </div>
             <ul class="pics__list">
@@ -54,11 +54,11 @@
                             <li class="colors__item">
                                 <label class="colors__label">
                                     <input class="colors__radio sr-only" type="radio" name="color-item" value="blue">
-                                    <span class="colors__value" style="background-color: #73B6EA;">
+                                    <span class="colors__value" style="background-color: rgb(97, 98, 67)">
                                     </span>
                                 </label>
                             </li>
-                            <li class="colors__item">
+                            <!-- <li class="colors__item">
                                 <label class="colors__label">
                                     <input class="colors__radio sr-only" type="radio" name="color-item" value="yellow">
                                     <span class="colors__value" style="background-color: #FFBE15;">
@@ -70,7 +70,7 @@
                                     <input class="colors__radio sr-only" type="radio" name="color-item" value="gray">
                                     <span class="colors__value" style="background-color: #939393;">
                                     </span></label>
-                            </li>
+                            </li> -->
                         </ul>
                     </fieldset>
 
@@ -149,13 +149,13 @@
         <div class="item__desc">
             <ul class="tabs">
                 <li class="tabs__item">
-                    <a class="tabs__link">
+                    <a class="tabs__link" href="#">
                         Описание
                     </a>
                 </li>
                 <li class="tabs__item">
                     <a class="tabs__link tabs__link--current" href="#">
-                        Характеристики
+                        Уход
                     </a>
                 </li>
                 <li class="tabs__item">
@@ -171,29 +171,13 @@
             </ul>
 
             <div class="item__content">
+                <h3>{{ productItem.material }}</h3>
+                <p>{{ productItem.sostav }}</p>
+                <h3>{{ productItem.userName }}</h3>
+                <p>{{ productItem.userSizeW }}</p>
+                <p>{{ productItem.userSizeM }}</p>
                 <h3>{{ productItem.text }}</h3>
-                <p>Wi-Fi, Bluetooth 4.0, ANT+</p>
-
-                <h3>{{ productItem.color }}</h3>
-                <p>GPS, ГЛОНАСС, BEIDOU Galileo и QZSS</p>
-
-                <h3>Аккумулятор</h3>
-                <p>перезаряжаемый USB</p>
-
-                <h3>Время автономной работы</h3>
-                <p>до 15 часов</p>
-
-                <h3>Тип аккумулятора</h3>
-                <p>литий-ионный</p>
-
-                <h3>Водонепроницаемость</h3>
-                <p>IPX7</p>
-
-                <h3>Фирменное приложение</h3>
-                <p>ELEMNT от Wahoo Fitness</p>
-
-                <h3>Совместимость</h3>
-                <p>iOS 9.0 и последующие, Android 4.3 и старше</p>
+                <p>{{ productItem.care }}</p>
             </div>
         </div>
     </div>
@@ -202,144 +186,43 @@
 
 <script>
 export default {
-  props: ['productsItem'],
+  props: ['productsItem', 'products'],
 };
 </script>
 
 <style>
-.item {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 55px 30px;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start
+html {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
 }
 
-.item__code {
-    font-size: 14px;
-    line-height: 1;
-    color: #b9b9b9
+*,
+::after,
+::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit
 }
 
-.item__title {
-    margin: 10px 0 22px;
-    font-size: 40px;
-    line-height: 50px;
-    font-weight: 400
+img {
+    max-width: 100%;
+    height: auto;
+    -o-object-fit: contain;
+    object-fit: contain
 }
 
-.item__form {
-    padding: 60px 50px;
-    background-color: #272727;
-    color: #fff
+a {
+    text-decoration: none
 }
 
-.item__price {
-    display: block;
-    margin-bottom: 15px;
-    font-weight: 500;
-    font-size: 40px;
-    line-height: 1
-}
-
-.item__sizes {
-    color: #898989
-}
-
-.item__row {
-    display: grid;
-    grid-template-columns: 150px 224px;
-    grid-gap: 15px
-}
-
-.item__desc {
-    grid-column: 1/-1
-}
-
-.item__content {
-    width: 595px;
-    padding-top: 50px
-}
-
-.item__content h3 {
-    margin: 25px 0 5px;
-    font-size: 16px;
-    line-height: 24px
-}
-
-.item__content p {
-    margin: 0 0 20px;
-    font-size: 16px;
-    line-height: 28px;
-    color: #222
-}
-
-.item__content a {
-    border-bottom: 2px dashed #222;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
-    font-size: 14px;
-    line-height: 22px;
-    color: #222
-}
-
-.item__content a:focus,
-.item__content a:hover {
-    border-color: transparent
-}
-
-.social {
-    margin: 0;
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
     padding: 0;
-    list-style: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap
-}
-
-.social__item+.social__item {
-    margin-left: 30px
-}
-
-.social__link {
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease;
-    color: #9eff00
-}
-
-.social__link:focus,
-.social__link:hover {
-    opacity: .5
-}
-
-.pics__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px
-}
-
-.pics__link {
-    border-bottom: 3px solid transparent;
-    -webkit-transition: all .2s ease;
-    transition: all .2s ease
-}
-
-.pics__link:focus,
-.pics__link:hover {
-    border-color: #272727
-}
-
-.pics__link--current {
-    border-color: #272727
+    border: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0)
 }
 
 .button {
@@ -374,6 +257,31 @@ export default {
 .button--primery:not(:disabled):hover {
     background-color: transparent;
     color: #fff
+}
+
+.button--second {
+    background-color: transparent;
+    border: 1px solid #fff;
+    padding: 15px;
+    color: #fff;
+    font-size: 14px
+}
+
+.button--second:not(:disabled):focus,
+.button--second:not(:disabled):hover {
+    background-color: #fff;
+    color: #222
+}
+
+.button-del {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    width: 20px;
+    height: 20px
 }
 
 .form__block {
@@ -543,4 +451,296 @@ export default {
     font-size: 13px;
     color: #000
 }
+
+.colors {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    --border-color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.colors--black {
+    --border-color: #222
+}
+
+.colors__item:not(:last-child) {
+    margin-right: 4px
+}
+
+.colors__label {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    border-radius: 50%;
+    padding: 3px
+}
+
+.colors__value,
+.colors__value::before {
+    border-radius: 50%;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease
+}
+
+.colors__value {
+    display: block;
+    width: 20px;
+    height: 20px
+}
+
+.colors__value::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 26px;
+    height: 26px;
+    border: 1px solid transparent
+}
+
+.colors__label:focus .colors__value::before,
+.colors__label:hover .colors__value::before,
+.colors__radio:checked~.colors__value::before {
+    border-color: var(--border-color)
+}
+
+.colors__radio:focus~.colors__value::before {
+    opacity: .7
+}
+
+.pics__wrapper {
+    margin-bottom: 20px
+}
+
+.pics__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px
+}
+
+.pics__link {
+    border-bottom: 3px solid transparent;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease
+}
+
+.pics__link:focus,
+.pics__link:hover {
+    border-color: #272727
+}
+
+.pics__link--current {
+    border-color: #272727
+}
+
+.tabs {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 1px solid #e7e7e7
+}
+
+.tabs__item:not(:last-child) {
+    margin-right: 20px
+}
+
+.tabs__link {
+    position: relative;
+    display: block;
+    padding: 15px 25px;
+    font-size: 18px;
+    color: #222
+}
+
+.tabs__link::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    border-radius: 20px;
+    background-color: transparent;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease
+}
+
+.tabs__link:focus::after,
+.tabs__link:hover::after {
+    bottom: -1px;
+    background-color: #272727
+}
+
+.tabs__link--current {
+    font-weight: 700
+}
+
+.tabs__link--current::after {
+    bottom: -1px;
+    background-color: #272727
+}
+
+.sizes {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    --text-color: #B9B9B9;
+    --text-current: #222;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center
+}
+
+.sizes--primery {
+    --text-color: #898989;
+    --text-current: #8BE000;
+    --text-border:  rgb(99, 255, 0);
+}
+
+.sizes__item:not(:last-child) {
+    margin-right: 5px
+}
+
+.sizes__label {
+    cursor: pointer;
+    display: block
+}
+
+.sizes__value {
+    display: block;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    min-width: 50px;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--text-color);
+    text-transform: uppercase
+}
+
+.sizes__value:first-child {
+    margin: 0 0 0 0;
+    background: red;
+}
+
+.sizes__label:focus .sizes__value,
+.sizes__label:hover .sizes__value {
+    font-weight: 500;
+    color: var(--text-current);
+}
+
+.sizes__radio:checked~.sizes__value {
+    font-weight: 500;
+    color: var(--text-current);
+    border: 1px solid var(--text-border);
+}
+
+.sizes__radio:focus~.sizes__value {
+    opacity: .7
+}
+
+.item {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 55px 30px;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start
+}
+
+.item__code {
+    font-size: 14px;
+    line-height: 1;
+    color: #b9b9b9
+}
+
+.item__title {
+    margin: 10px 0 22px;
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 400
+}
+
+.item__form {
+    padding: 60px 50px;
+    background-color: #272727;
+    color: #fff
+}
+
+.item__price {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1
+}
+
+.item__sizes {
+    color: #898989
+}
+
+.item__row {
+    display: grid;
+    grid-template-columns: 150px 224px;
+    grid-gap: 15px
+}
+
+.item__desc {
+    grid-column: 1/-1
+}
+
+.item__content {
+    width: 595px;
+    padding-top: 50px
+}
+
+.item__content h3 {
+    margin: 25px 0 5px;
+    font-size: 16px;
+    line-height: 24px
+}
+
+.item__content p {
+    margin: 0 0 20px;
+    font-size: 16px;
+    line-height: 28px;
+    color: #222
+}
+
+.item__content a {
+    border-bottom: 2px dashed #222;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    font-size: 14px;
+    line-height: 22px;
+    color: #222
+}
+
+.item__content a:focus,
+.item__content a:hover {
+    border-color: transparent
+}
+
+/*# sourceMappingURL=style.min.css.map */
 </style>

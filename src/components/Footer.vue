@@ -100,12 +100,6 @@
 <script></script>
 
 <style>
-.container {
-    width: 1200px;
-    margin: 0 auto;
-    padding-left: 15px;
-    padding-right: 15px
-}
 .footer {
     background-color: #272727
 }
@@ -118,6 +112,13 @@
     justify-content: space-between;
     padding-top: 60px;
     padding-bottom: 60px
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px
 }
 
 .footer__link {
