@@ -8,7 +8,7 @@
     <div :product="product">
 
     <div id="test">
-        <a class="catalog__pic test2" href="ProductItem.vue">
+        <a class="catalog__pic test2" href="#">
             <img :src="product.image" :alt="product.title">
         </a>
     </div>

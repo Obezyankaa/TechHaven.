@@ -297,8 +297,8 @@
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     width: 14px;
-    height: 7px;
-    /* background-image: url(../img/svg/icon-arrow-bottom.svg); */
+    height: 13px;
+    background-image: url(../../public/img/iconfilter/iconmonstr-arrow-80.svg);
     background-repeat: no-repeat;
     background-size: contain
 }
@@ -536,7 +536,7 @@
     left: 4px;
     width: 16px;
     height: 13px;
-    /* background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 8l5 5L18 2' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E"); */
+    background-image: url(../../public/img/iconfilter/iconmonstr-check-mark-15.svg);
     background-repeat: no-repeat;
     background-size: contain;
     -webkit-transition: all .2s ease;
@@ -555,5 +555,4 @@
 .check-list__check:checked~.check-list__desc::after {
     opacity: 1
 }
-
 </style>
