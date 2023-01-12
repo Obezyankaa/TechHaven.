@@ -80,13 +80,13 @@
             </fieldset>
 
             <fieldset class="form__block">
-                <legend class="form__legend">Объемб в ГБ</legend>
+                <legend class="form__legend">Размер</legend>
                 <ul class="check-list">
                     <li class="check-list__item">
                         <label class="check-list__label">
                             <input class="check-list__check sr-only" type="checkbox" name="volume" value="8">
                             <span class="check-list__desc">
-                                8
+                                XS
                                 <span>(313)</span>
                             </span>
                         </label>
@@ -95,7 +95,7 @@
                         <label class="check-list__label">
                             <input class="check-list__check sr-only" type="checkbox" name="volume" value="16">
                             <span class="check-list__desc">
-                                16
+                                S
                                 <span>(461)</span>
                             </span>
                         </label>
@@ -104,7 +104,7 @@
                         <label class="check-list__label">
                             <input class="check-list__check sr-only" type="checkbox" name="volume" value="32">
                             <span class="check-list__desc">
-                                32
+                                M
                                 <span>(313)</span>
                             </span>
                         </label>
@@ -113,7 +113,7 @@
                         <label class="check-list__label">
                             <input class="check-list__check sr-only" type="checkbox" name="volume" value="64">
                             <span class="check-list__desc">
-                                64
+                                L
                                 <span>(313)</span>
                             </span>
                         </label>
@@ -122,7 +122,7 @@
                         <label class="check-list__label">
                             <input class="check-list__check sr-only" type="checkbox" name="volume" value="128">
                             <span class="check-list__desc">
-                                128
+                                XL
                                 <span>(313)</span>
                             </span>
                         </label>
@@ -131,7 +131,7 @@
                         <label class="check-list__label">
                             <input class="check-list__check sr-only" type="checkbox" name="volume" value="264">
                             <span class="check-list__desc">
-                                264
+                                XXL
                                 <span>(313)</span>
                             </span>
                         </label>
@@ -151,6 +151,83 @@
 </template>
 
 <style>
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0)
+}
+
+/* .container {
+    width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px
+} */
+
+.button {
+    margin: 0;
+    border: 0;
+    font: inherit;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    padding: 25px 15px;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    vertical-align: middle;
+    text-transform: uppercase;
+    cursor: pointer
+}
+
+.button:disabled {
+    opacity: .5;
+    cursor: not-allowed
+}
+
+.button--primery {
+    background-color: #9eff00;
+    border: 1px solid #9eff00;
+    font-family: "PressStart";
+    color: #222;
+    font-size: 13px
+}
+
+.button--primery:not(:disabled):focus,
+.button--primery:not(:disabled):hover {
+    background-color: transparent;
+    color: #fff
+}
+
+.button--second {
+    background-color: transparent;
+    border: 1px solid #fff;
+    padding: 15px;
+    color: #fff;
+    font-size: 14px
+}
+
+.button--second:not(:disabled):focus,
+.button--second:not(:disbled):hover {
+    background-color: #fff;
+    color: #222
+}
+
+.button-del {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    width: 20px;
+    height: 20px
+}
+
 .filter {
     background-color: #272727;
     color: #fff
@@ -178,4 +255,305 @@
 .filter__reset {
     width: 144px
 }
+
+.form__block {
+    border: 0;
+    padding: 0;
+    margin: 0 0 35px
+}
+
+.form__legend {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1
+}
+
+.form__label {
+    position: relative;
+    display: block;
+    background-color: #fff;
+    color: #737373
+}
+
+.form__label:not(:last-child) {
+    margin-bottom: 25px
+}
+
+.form__label--price::after {
+    content: '₽';
+    position: absolute;
+    top: 32px;
+    right: 20px;
+    font-size: 16px;
+    line-height: 1;
+    color: #222
+}
+
+.form__label--select::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 14px;
+    height: 7px;
+    /* background-image: url(../img/svg/icon-arrow-bottom.svg); */
+    background-repeat: no-repeat;
+    background-size: contain
+}
+
+.form__value {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 12px;
+    line-height: 1;
+    color: #737373;
+    font-weight: 300
+}
+
+.form__input {
+    padding: 28px 45px 13px 20px;
+    width: 100%;
+    height: 65px;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid #cfcfcf;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    color: #222;
+    font-size: 16px;
+    font-family: inherit;
+    line-height: 1
+}
+
+.form__input:focus,
+.form__input:hover {
+    outline: 0;
+    border-color: #272727
+}
+
+.form__input--area {
+    height: 140px;
+    resize: none
+}
+
+.form__select {
+    width: 100%;
+    height: 52px;
+    border-radius: 0;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 14px 35px 14px 18px;
+    color: #222;
+    font-size: 16px;
+    font-family: inherit;
+    line-height: 1
+}
+
+.form__counter {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 150px;
+    height: 70px;
+    background-color: #fff
+}
+
+.form__counter button,
+.form__counter input {
+    height: 70px;
+    background-color: transparent;
+    border: 0;
+    font: inherit
+}
+
+.form__counter button {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    display: block;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 40px
+}
+
+.form__counter input {
+    padding: 23px 5px;
+    width: 70px;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #222;
+    font-size: 24px;
+    line-height: 1;
+    text-align: center
+}
+
+.form__error {
+    position: absolute;
+    bottom: -17px;
+    left: 20px;
+    font-size: 11px;
+    line-height: 14px;
+    color: #ff4d00
+}
+
+.form__error-block {
+    padding: 25px 30px;
+    border: 3px solid #ff4d00;
+    border-radius: 1px
+}
+
+.form__error-block h4 {
+    margin: 0 0 4px;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 24px;
+    color: #ff4d00
+}
+
+.form__error-block p {
+    margin: 0;
+    font-size: 13px;
+    color: #000
+}
+
+.colors {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    --border-color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.colors--black {
+    --border-color: #222
+}
+
+.colors__item:not(:last-child) {
+    margin-right: 4px
+}
+
+.colors__label {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    border-radius: 50%;
+    padding: 3px
+}
+
+.colors__value,
+.colors__value::before {
+    border-radius: 50%;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease
+}
+
+.colors__value {
+    display: block;
+    width: 20px;
+    height: 20px
+}
+
+.colors__value::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 26px;
+    height: 26px;
+    border: 1px solid transparent
+}
+
+.colors__label:focus .colors__value::before,
+.colors__label:hover .colors__value::before,
+.colors__radio:checked~.colors__value::before {
+    border-color: var(--border-color)
+}
+
+.colors__radio:focus~.colors__value::before {
+    opacity: .7
+}
+
+.check-list {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.check-list__item:not(:last-child) {
+    margin-bottom: 13px
+}
+
+.check-list__label {
+    display: block;
+    cursor: pointer
+}
+
+.check-list__desc {
+    position: relative;
+    display: block;
+    padding-left: 32px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 16px;
+    line-height: 1
+}
+
+.check-list__desc::after,
+.check-list__desc::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%)
+}
+
+.check-list__desc::before {
+    left: 0;
+    width: 22px;
+    height: 22px;
+    background-color: #fff
+}
+
+.check-list__desc::after {
+    opacity: 0;
+    left: 4px;
+    width: 16px;
+    height: 13px;
+    /* background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 8l5 5L18 2' stroke='%23000' stroke-width='3'/%3E%3C/svg%3E"); */
+    background-repeat: no-repeat;
+    background-size: contain;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease
+}
+
+.check-list__desc span {
+    color: #737373
+}
+
+.check-list__label:focus .check-list__desc::after,
+.check-list__label:hover .check-list__desc::after {
+    opacity: .3
+}
+
+.check-list__check:checked~.check-list__desc::after {
+    opacity: 1
+}
+
 </style>

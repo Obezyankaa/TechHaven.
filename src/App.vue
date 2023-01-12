@@ -3,10 +3,10 @@
 <template>
     <section>
       <HeaderVue />
-      <main class="content container">
-        <ProductList :products="products" />
-        <ProductItemVue :products="products" :productsItem="productsItem" />
-      </main>
+      <MainVue>
+<ProductList :products="products" />
+<ProductItemVue :products="products" :productsItem="productsItem" />
+      </MainVue>
       <FooterVue />
     </section>
 </template>
@@ -18,10 +18,11 @@ import productsItem from './Data/productsItem';
 import ProductList from './components/ProductList.vue';
 import ProductItemVue from './components/ProductItem.vue';
 import FooterVue from './components/Footer.vue';
+import MainVue from './components/Main.vue';
 
 export default {
   components: {
-    ProductList, HeaderVue, FooterVue, ProductItemVue,
+    ProductList, HeaderVue, FooterVue, ProductItemVue, MainVue,
   },
   name: 'App',
   data() {
@@ -34,17 +35,4 @@ export default {
 </script>
 
 <style>
-.content {
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  padding-top: 35px;
-  padding-bottom: 100px
-}
-.container {
-  width: 1200px;
-  margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px
-}
 </style>

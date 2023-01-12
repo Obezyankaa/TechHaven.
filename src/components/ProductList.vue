@@ -1,16 +1,16 @@
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable max-len -->
 <template>
-<div class="content__catalog">
 <div class="catalog">
 <ul class="catalog__list">
     <li class="catalog__item" v-for="(product, index) in products" :key="index">
-      <div id="test">
+       <ProductItemVue :products="products" />
+
+        <!-- <div id="test">
         <a class="catalog__pic test2" href="ProductItem.vue">
             <img :src="product.image" :alt="product.title">
         </a>
       </div>
-
         <h3 class="catalog__title">
             <a href="#">
                 {{ product.title }}
@@ -19,7 +19,7 @@
 
         <span class="catalog__price">
             {{ product.price }} ₽
-        </span>
+        </span> -->
 
         <!-- <ul class="colors colors--black">
             <li class="colors__item">
@@ -94,12 +94,17 @@
     </li>
 </ul>
 </div>
-</div>
 </template>
 
 <script>
+import ProductItemVue from './ProductItem.vue';
+
 export default {
   props: ['products'],
+  components: {
+    ProductItemVue,
+  },
+  template: '<ProductItemVue :products=\'products\'/>',
 };
 </script>
 
@@ -134,14 +139,6 @@ export default {
 
 #test+#test .test2 {
     background: #000;
-}
-.content__catalog {
-    display: grid;
-    grid-template-columns: 290px 1fr;
-    grid-gap: 20px;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start
 }
 
 .catalog__list {

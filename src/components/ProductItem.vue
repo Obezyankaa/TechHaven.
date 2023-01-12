@@ -1,196 +1,56 @@
+<!-- eslint-disable vue/valid-template-root -->
+<!-- eslint-disable vue/no-multiple-template-root -->
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-    <section >
-        <div class="item" :="products">
-        <div class="item__pics pics">
-            <div class="pics__wrapper">
-                <img width="570" height="570" :src="products[0].image"
-                    alt="Название товара">
-            </div>
-            <ul class="pics__list">
-                <li class="pics__item">
-                    <a href="" class="pics__link pics__link--current">
-                        <img width="98" height="98" :src="productItem.image2" srcset="img/phone-square-1@2x.jpg 2x"
-                            alt="Название товара">
-                    </a>
-                </li>
-                <li class="pics__item">
-                    <a href="" class="pics__link">
-                        <img width="98" height="98" :src="productItem.image3" srcset="img/phone-square-2@2x.jpg 2x"
-                            alt="Название товара">
-                    </a>
-                </li>
-                <li class="pics__item">
-                    <a href="" class="pics__link">
-                        <img width="98" height="98" :src="productItem.image4" srcset="img/phone-square-3@2x.jpg 2x"
-                            alt="Название товара">
-                    </a>
-                </li>
-                <li class="pics__item">
-                    <a class="pics__link" href="#">
-                        <img width="98" height="98" :src="productItem.image5" srcset="img/phone-square-4@2x.jpg 2x"
-                            alt="Название товара">
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="item__info">
-            <span class="item__code">Артикул: 150030</span>
-            <h2 class="item__title">
-                {{ productItem.title }}
-            </h2>
-            <div class="item__form">
-                <form class="form" action="#" method="POST">
-                    <b class="item__price">
-                        {{ productItem.price }} ₽
-                    </b>
-
-                    <fieldset class="form__block">
-                        <legend class="form__legend">Цвет:</legend>
-                        <ul class="colors">
-                            <li class="colors__item">
-                                <label class="colors__label">
-                                    <input class="colors__radio sr-only" type="radio" name="color-item" value="blue">
-                                    <span class="colors__value" style="background-color: rgb(97, 98, 67)">
-                                    </span>
-                                </label>
-                            </li>
-                            <!-- <li class="colors__item">
-                                <label class="colors__label">
-                                    <input class="colors__radio sr-only" type="radio" name="color-item" value="yellow">
-                                    <span class="colors__value" style="background-color: #FFBE15;">
-                                    </span>
-                                </label>
-                            </li>
-                            <li class="colors__item">
-                                <label class="colors__label">
-                                    <input class="colors__radio sr-only" type="radio" name="color-item" value="gray">
-                                    <span class="colors__value" style="background-color: #939393;">
-                                    </span></label>
-                            </li> -->
-                        </ul>
-                    </fieldset>
-
-                    <fieldset class="form__block">
-                        <legend class="form__legend">Размер:</legend>
-
-                        <ul class="sizes sizes--primery">
-                            <li class="sizes__item">
-                                <label class="sizes__label">
-                                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="64">
-                                    <span class="sizes__value">
-                                        S
-                                    </span>
-                                </label>
-                            </li>
-                            <li class="sizes__item">
-                                <label class="sizes__label">
-                                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="128">
-                                    <span class="sizes__value">
-                                        M
-                                    </span>
-                                </label>
-                            </li>
-                            <li class="sizes__item">
-                                <label class="sizes__label">
-                                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="128">
-                                    <span class="sizes__value">
-                                        L
-                                    </span>
-                                </label>
-                            </li>
-                            <li class="sizes__item">
-                                <label class="sizes__label">
-                                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="128">
-                                    <span class="sizes__value">
-                                        XL
-                                    </span>
-                                </label>
-                            </li>
-                            <li class="sizes__item">
-                                <label class="sizes__label">
-                                    <input class="sizes__radio sr-only" type="radio" name="sizes-item" value="128">
-                                    <span class="sizes__value">
-                                        XXL
-                                    </span>
-                                </label>
-                            </li>
-                        </ul>
-                    </fieldset>
-
-                    <div class="item__row">
-                        <div class="form__counter">
-                            <button type="button" aria-label="Убрать один товар">
-                                <svg width="12" height="12" fill="currentColor">
-                                    <use xlink:href="#icon-minus"></use>
-                                </svg>
-                            </button>
-
-                            <input type="text" value="1" name="count">
-
-                            <button type="button" aria-label="Добавить один товар">
-                                <svg width="12" height="12" fill="currentColor">
-                                    <use xlink:href="#icon-plus"></use>
-                                </svg>
-                            </button>
-                        </div>
-
-                        <button class="button button--primery" type="submit">
-                            В корзину
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="item__desc">
-            <ul class="tabs">
-                <li class="tabs__item">
-                    <a class="tabs__link" href="#">
-                        Описание
-                    </a>
-                </li>
-                <li class="tabs__item">
-                    <a class="tabs__link tabs__link--current" href="#">
-                        Уход
-                    </a>
-                </li>
-                <li class="tabs__item">
-                    <a class="tabs__link" href="#">
-                        Гарантия
-                    </a>
-                </li>
-                <li class="tabs__item">
-                    <a class="tabs__link" href="#">
-                        Оплата и доставка
-                    </a>
-                </li>
-            </ul>
-
-            <div class="item__content">
-                <h3>{{ productItem.material }}</h3>
-                <p>{{ productItem.sostav }}</p>
-                <h3>{{ productItem.userName }}</h3>
-                <p>{{ productItem.userSizeW }}</p>
-                <p>{{ productItem.userSizeM }}</p>
-                <h3>{{ productItem.text }}</h3>
-                <p>{{ productItem.care }}</p>
-            </div>
-        </div>
+<!-- <li class="catalog__item" :products="products" >
+    <div id="test">
+        <a class="catalog__pic test2" href="ProductItem.vue">
+            <img :src="product.image" :alt="product.title">
+        </a>
     </div>
-    </section>
+    <h3 class="catalog__title">
+        <a href="#">
+            {{ product.title }}
+        </a>
+    </h3>
+
+    <span class="catalog__price">
+        {{ product.price }} ₽
+    </span> -->
+
+    <!-- <ul class="colors colors--black">
+            <li class="colors__item">
+                <label class="colors__label">
+                    <input class="colors__radio sr-only" type="radio" name="color-1" value="#73B6EA" checked="">
+                    <span class="colors__value" style="background-color: #73B6EA;">
+                    </span>
+                </label>
+            </li>
+            <li class="colors__item">
+                <label class="colors__label">
+                    <input class="colors__radio sr-only" type="radio" name="color-1" value="#8BE000">
+                    <span class="colors__value" style="background-color: #8BE000;">
+                    </span>
+                </label>
+            </li>
+            <li class="colors__item">
+                <label class="colors__label">
+                    <input class="colors__radio sr-only" type="radio" name="color-1" value="#222">
+                    <span class="colors__value" style="background-color: #222;">
+                    </span>
+                </label>
+            </li>
+        </ul> -->
+<!-- </li> -->
 </template>
 
 <script>
-export default {
-  props: ['productsItem', 'products'],
-};
+
 </script>
 
-<style>
+<!-- <style>
 html {
     -webkit-box-sizing: border-box;
     box-sizing: border-box
@@ -743,4 +603,4 @@ a {
 }
 
 /*# sourceMappingURL=style.min.css.map */
-</style>
+</style> -->
