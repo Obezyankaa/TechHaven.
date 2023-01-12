@@ -1,15 +1,15 @@
+<!-- eslint-disable vuejs-accessibility/anchor-has-content -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable max-len -->
 <template>
 <div class="catalog">
 <ul class="catalog__list">
     <li class="catalog__item" v-for="(product, index) in products" :key="index">
-       <ProductItemVue :products="products" />
-
+      <ProductItemVue :product="product"/>
         <!-- <div id="test">
-        <a class="catalog__pic test2" href="ProductItem.vue">
-            <img :src="product.image" :alt="product.title">
-        </a>
+            <a class="catalog__pic test2" href="#">
+               <img :src="product.image" :alt="product.title">
+            </a>
       </div>
         <h3 class="catalog__title">
             <a href="#">
@@ -104,7 +104,6 @@ export default {
   components: {
     ProductItemVue,
   },
-  template: '<ProductItemVue :products=\'products\'/>',
 };
 </script>
 

@@ -4,7 +4,9 @@
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-<!-- <li class="catalog__item" :products="products" >
+
+    <div :product="product">
+
     <div id="test">
         <a class="catalog__pic test2" href="ProductItem.vue">
             <img :src="product.image" :alt="product.title">
@@ -18,36 +20,14 @@
 
     <span class="catalog__price">
         {{ product.price }} ₽
-    </span> -->
-
-    <!-- <ul class="colors colors--black">
-            <li class="colors__item">
-                <label class="colors__label">
-                    <input class="colors__radio sr-only" type="radio" name="color-1" value="#73B6EA" checked="">
-                    <span class="colors__value" style="background-color: #73B6EA;">
-                    </span>
-                </label>
-            </li>
-            <li class="colors__item">
-                <label class="colors__label">
-                    <input class="colors__radio sr-only" type="radio" name="color-1" value="#8BE000">
-                    <span class="colors__value" style="background-color: #8BE000;">
-                    </span>
-                </label>
-            </li>
-            <li class="colors__item">
-                <label class="colors__label">
-                    <input class="colors__radio sr-only" type="radio" name="color-1" value="#222">
-                    <span class="colors__value" style="background-color: #222;">
-                    </span>
-                </label>
-            </li>
-        </ul> -->
-<!-- </li> -->
+    </span>
+</div>
 </template>
 
 <script>
-
+export default {
+  props: ['product'],
+};
 </script>
 
 <!-- <style>

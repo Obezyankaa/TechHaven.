@@ -12,7 +12,7 @@
             </div>
             <div class="content__catalog">
                 <ProductFilterVue/>
-                <ProductListVue/>
+                <ProductListVue :products="products"/>
             </div>
         </main>
     </div>
@@ -23,6 +23,7 @@ import ProductFilterVue from './ProductFilter.vue';
 import ProductListVue from './ProductList.vue';
 
 export default {
+  props: ['products'],
   components: {
     ProductFilterVue,
     ProductListVue,

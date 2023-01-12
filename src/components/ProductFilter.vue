@@ -12,7 +12,7 @@
                     <span class="form__value">От</span>
                 </label>
                 <label class="form__label form__label--price">
-                    <input class="form__input" type="text" name="max-price" value="12345">
+                    <input class="form__input" type="text" name="max-price" value="0">
                     <span class="form__value">До</span>
                 </label>
             </fieldset>
@@ -22,9 +22,9 @@
                 <label class="form__label form__label--select">
                     <select class="form__select" type="text" name="category">
                         <option value="value1">Все категории</option>
-                        <option value="value2">Зубные щетки</option>
-                        <option value="value3">Телефоны</option>
-                        <option value="value4">Спортинвентарь</option>
+                        <option value="value2">Худи</option>
+                        <option value="value3">Футболки</option>
+                        <option value="value4">Рюкзаки</option>
                     </select>
                 </label>
             </fieldset>
