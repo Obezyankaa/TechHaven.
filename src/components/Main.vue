@@ -1,4 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable max-len -->
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div>
         <main class="content container">
@@ -12,7 +14,7 @@
             </div>
             <div class="content__catalog">
                 <ProductFilterVue/>
-                <ProductListVue :products="products"/>
+                <ProductListVue :page="page" :count="count" :per-page="perPage" :products="products"/>
             </div>
         </main>
     </div>
@@ -23,7 +25,7 @@ import ProductFilterVue from './ProductFilter.vue';
 import ProductListVue from './ProductList.vue';
 
 export default {
-  props: ['products'],
+  props: ['products', 'page', 'count', 'per-page'],
   components: {
     ProductFilterVue,
     ProductListVue,

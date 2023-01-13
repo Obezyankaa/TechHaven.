@@ -4,9 +4,7 @@
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-
-    <div :product="product">
-
+<div>
     <div id="test">
         <a class="catalog__pic test2" href="#">
             <img :src="product.image" :alt="product.title">

@@ -3,7 +3,7 @@
 <template>
     <section>
       <HeaderVue />
-      <MainVue :products="products" />
+      <MainVue :page="page" :count="countProducts" :per-page="productsPerPage" :products="products" />
       <FooterVue />
     </section>
 </template>
@@ -24,9 +24,19 @@ export default {
   name: 'App',
   data() {
     return {
-      products,
       productsItem,
+      page: 1,
+      productsPerPage: 6,
     };
+  },
+  computed: {
+    products() {
+      const offser = (this.page - 1) * this.productsPerPage;
+      return products.slice(offser, offser + this.productsPerPage);
+    },
+    countProducts() {
+      return products.length;
+    },
   },
 };
 </script>
