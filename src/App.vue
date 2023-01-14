@@ -3,7 +3,7 @@
 <template>
     <section>
       <HeaderVue />
-      <MainVue :page="page" :count="countProducts" :per-page="productsPerPage" :products="products" />
+      <MainVue v-model="page" :count="countProducts" :per-page="productsPerPage" :products="products" />
       <FooterVue />
     </section>
 </template>
@@ -26,7 +26,7 @@ export default {
     return {
       productsItem,
       page: 1,
-      productsPerPage: 6,
+      productsPerPage: 3,
     };
   },
   computed: {

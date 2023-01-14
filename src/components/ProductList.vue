@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <!-- eslint-disable vuejs-accessibility/anchor-has-content -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <!-- eslint-disable max-len -->
@@ -8,7 +9,7 @@
       <ProductItemVue :product="product"/>
     </li>
 </ul>
-<BasePaginationVue :page="page" :count="countProducts" :perPage="productsPerPage" />
+<BasePaginationVue v-model="page" :count="count" :perPage="perPage" :products="products" />
 </div>
 </template>
 
@@ -17,6 +18,9 @@ import ProductItemVue from './ProductItem.vue';
 import BasePaginationVue from './BasePagination.vue';
 
 export default {
+  model: {
+    prop: 'page',
+  },
   props: ['products', 'page', 'count', 'perPage'],
   components: {
     ProductItemVue, BasePaginationVue,

@@ -1,4 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/no-mutating-props -->
+<!-- eslint-disable vue/multi-word-component-names -->
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
@@ -14,7 +16,7 @@
             </div>
             <div class="content__catalog">
                 <ProductFilterVue/>
-                <ProductListVue :page="page" :count="count" :per-page="perPage" :products="products"/>
+                <ProductListVue v-model="page" :count="count" :per-page="perPage" :products="products"/>
             </div>
         </main>
     </div>
@@ -25,6 +27,9 @@ import ProductFilterVue from './ProductFilter.vue';
 import ProductListVue from './ProductList.vue';
 
 export default {
+  model: {
+    prop: 'page',
+  },
   props: ['products', 'page', 'count', 'per-page'],
   components: {
     ProductFilterVue,
