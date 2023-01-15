@@ -83,22 +83,40 @@ export default [
     price: 15990,
     image: '/img/imageBtb/btb12.png',
   },
-  // {
-  //   id: 13,
-  //   title: 'Подарочный сертификат на костюм (худи + штаны) BornToBe',
-  //   price: 13980,
-  //   image: '/img/imageBtb/btb13.jpeg',
-  // },
-  // {
-  //   id: 14,
-  //   title: 'Подарочный сертификат на любое худи Born To Be',
-  //   price: 7490,
-  //   image: '/img/imageBtb/btb14.jpeg',
-  // },
-  // {
-  //   id: 15,
-  //   title: 'Подарочный сертификат на рюкзак Born To Be 3.1',
-  //   price: 15990,
-  //   image: '/img/imageBtb/btb15.jpeg',
-  // },
+  {
+    id: 13,
+    title: 'Подарочный сертификат на костюм (худи + штаны) BornToBe',
+    price: 13980,
+    image: '/img/imageBtb/btb13.jpeg',
+  },
+  {
+    id: 14,
+    title: 'Подарочный сертификат на любое худи Born To Be',
+    price: 7490,
+    image: '/img/imageBtb/btb14.jpeg',
+  },
+  {
+    id: 15,
+    title: 'Подарочный сертификат на рюкзак Born To Be 3.1',
+    price: 15990,
+    image: '/img/imageBtb/btb15.jpeg',
+  },
+  {
+    id: 16,
+    title: 'Сумка поясная Born To Be 3.2 чёрная',
+    price: 5990,
+    image: '/img/imageBtb/btb16.jpeg',
+  },
+  {
+    id: 17,
+    title: 'Сумка поясная Born To Be 3.2 белая',
+    price: 5990,
+    image: '/img/imageBtb/btb17.jpeg',
+  },
+  {
+    id: 18,
+    title: 'Шопер маленький чёрный',
+    price: 990,
+    image: '/img/imageBtb/btb18.jpeg',
+  },
 ];
