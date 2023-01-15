@@ -16,8 +16,10 @@
             </div>
             <div class="content__catalog">
                 <ProductFilterVue/>
-                <ProductListVue v-model="page" :count="count" :per-page="perPage" :products="products"/>
+                <ProductListVue :products="productss"/>
             </div>
+            <BasePaginationVue v-model="page" :count="countProducts" :perPage="productsPerPage" :products="productss" />
+
         </main>
     </div>
 </template>
@@ -25,15 +27,30 @@
 <script>
 import ProductFilterVue from './ProductFilter.vue';
 import ProductListVue from './ProductList.vue';
+import products from '../Data/products';
+import BasePaginationVue from './BasePagination.vue';
 
 export default {
-  model: {
-    prop: 'page',
+  data() {
+    return {
+      page: 1,
+      productsPerPage: 3,
+    };
   },
-  props: ['products', 'page', 'count', 'per-page'],
+  props: ['products'],
   components: {
     ProductFilterVue,
     ProductListVue,
+    BasePaginationVue,
+  },
+  computed: {
+    productss() {
+      const offser = (this.page - 1) * this.productsPerPage;
+      return products.slice(offser, offser + this.productsPerPage);
+    },
+    countProducts() {
+      return products.length;
+    },
   },
 };
 </script>

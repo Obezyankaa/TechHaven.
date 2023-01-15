@@ -9,21 +9,17 @@
       <ProductItemVue :product="product"/>
     </li>
 </ul>
-<BasePaginationVue v-model="page" :count="count" :perPage="perPage" :products="products" />
+<!-- <BasePaginationVue v-model="page" :count="count" :perPage="perPage" :products="products" /> -->
 </div>
 </template>
 
 <script>
 import ProductItemVue from './ProductItem.vue';
-import BasePaginationVue from './BasePagination.vue';
 
 export default {
-  model: {
-    prop: 'page',
-  },
-  props: ['products', 'page', 'count', 'perPage'],
+  props: ['products'],
   components: {
-    ProductItemVue, BasePaginationVue,
+    ProductItemVue,
   },
 };
 </script>

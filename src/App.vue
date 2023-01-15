@@ -3,7 +3,7 @@
 <template>
     <section>
       <HeaderVue />
-      <MainVue v-model="page" :count="countProducts" :per-page="productsPerPage" :products="products" />
+      <MainVue :products="products" />
       <FooterVue />
     </section>
 </template>
@@ -11,7 +11,7 @@
 <script>
 import HeaderVue from './components/Header.vue';
 import products from './Data/products';
-import productsItem from './Data/productsItem';
+// import productsItem from './Data/productsItem';
 // import ProductList from './components/ProductList.vue';
 // import ProductItemVue from './components/ProductItem.vue';
 import FooterVue from './components/Footer.vue';
@@ -24,20 +24,20 @@ export default {
   name: 'App',
   data() {
     return {
-      productsItem,
-      page: 1,
-      productsPerPage: 3,
+      products,
+      // page: 1,
+      // productsPerPage: 3,
     };
   },
-  computed: {
-    products() {
-      const offser = (this.page - 1) * this.productsPerPage;
-      return products.slice(offser, offser + this.productsPerPage);
-    },
-    countProducts() {
-      return products.length;
-    },
-  },
+  // computed: {
+  //   products() {
+  //     const offser = (this.page - 1) * this.productsPerPage;
+  //     return products.slice(offser, offser + this.productsPerPage);
+  //   },
+  //   countProducts() {
+  //     return products.length;
+  //   },
+  // },
 };
 </script>
 
