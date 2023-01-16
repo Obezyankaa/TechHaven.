@@ -19,11 +19,39 @@
     <span class="catalog__price">
         {{ product.price }} ₽
     </span>
+            <ul class="colors colors--black">
+                <li class="colors__item">
+                    <label class="colors__label">
+                        <input class="colors__radio sr-only" type="radio" value="#F0F0F0" v-model="color">
+                        <span class="colors__value" style="background-color: #F0F0F0;">
+                        </span>
+                    </label>
+                </li>
+                <li class="colors__item">
+                    <label class="colors__label">
+                        <input class="colors__radio sr-only" type="radio" value="#8BE000" v-model="color">
+                        <span class="colors__value" style="background-color: #8BE000;">
+                        </span>
+                    </label>
+                </li>
+                <li class="colors__item">
+                    <label class="colors__label">
+                        <input class="colors__radio sr-only" type="radio" value="#73B6EA" v-model="color">
+                        <span class="colors__value" style="background-color: #73B6EA;">
+                        </span>
+                    </label>
+                </li>
+            </ul>
 </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      color: '#F0F0F0',
+    };
+  },
   props: ['product'],
 };
 </script>

@@ -5,7 +5,7 @@
 <template>
 <div class="catalog">
 <ul class="catalog__list">
-    <li class="catalog__item" v-for="(product, index) in products" :key="index">
+    <li class="catalog__item" v-for="(product) in products" :key="product.id">
       <ProductItemVue :product="product"/>
     </li>
 </ul>

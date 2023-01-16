@@ -15,10 +15,10 @@
                 </span>
             </div>
             <div class="content__catalog">
-                <ProductFilterVue/>
+                <ProductFilterVue :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync="filterCategoryId"/>
                 <ProductListVue :products="productss"/>
             </div>
-            <BasePaginationVue v-model="page" :count="countProducts" :perPage="productsPerPage" :products="productss" />
+            <BasePaginationVue v-model="page" :count="countProducts" :perPage="productsPerPage" :products="products" />
 
         </main>
     </div>
@@ -33,6 +33,9 @@ import BasePaginationVue from './BasePagination.vue';
 export default {
   data() {
     return {
+      filterPriceFrom: 0,
+      filterPriceTo: 0,
+      filterCategoryId: 0,
       page: 1,
       productsPerPage: 6,
     };
@@ -44,12 +47,28 @@ export default {
     BasePaginationVue,
   },
   computed: {
+    filtereProducts() {
+      let filtereProducts = products;
+
+      if (this.filterPriceFrom > 0) {
+        filtereProducts = filtereProducts.filter((el) => el.price > this.filterPriceFrom);
+      }
+
+      if (this.filterPriceTo > 0) {
+        filtereProducts = filtereProducts.filter((el) => el.price < this.filterPriceTo);
+      }
+
+      if (this.filterCategoryId > 0) {
+        filtereProducts = filtereProducts.filter((el) => el.categoriesId === this.filterCategoryId);
+      }
+      return filtereProducts;
+    },
     productss() {
       const offser = (this.page - 1) * this.productsPerPage;
-      return products.slice(offser, offser + this.productsPerPage);
+      return this.filtereProducts.slice(offser, offser + this.productsPerPage);
     },
     countProducts() {
-      return products.length;
+      return this.filtereProducts.length;
     },
   },
 };

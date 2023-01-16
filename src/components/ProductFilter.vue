@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
@@ -8,11 +9,11 @@
             <fieldset class="form__block">
                 <legend class="form__legend">Цена</legend>
                 <label class="form__label form__label--price">
-                    <input class="form__input" type="text" name="min-price" value="0">
+                    <input class="form__input" type="text" name="min-price" v-model="currentPriceFrom">
                     <span class="form__value">От</span>
                 </label>
                 <label class="form__label form__label--price">
-                    <input class="form__input" type="text" name="max-price" value="0">
+                    <input class="form__input" type="text" name="max-price" v-model="priceTo">
                     <span class="form__value">До</span>
                 </label>
             </fieldset>
@@ -20,11 +21,9 @@
             <fieldset class="form__block">
                 <legend class="form__legend">Категория</legend>
                 <label class="form__label form__label--select">
-                    <select class="form__select" type="text" name="category">
-                        <option value="value1">Все категории</option>
-                        <option value="value2">Худи</option>
-                        <option value="value3">Футболки</option>
-                        <option value="value4">Рюкзаки</option>
+                    <select class="form__select" type="text" name="category" v-model="categoryId">
+                        <option value="0">Все категории</option>
+                        <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.title }}</option>
                     </select>
                 </label>
             </fieldset>
@@ -149,6 +148,27 @@
     </aside>
 
 </template>
+
+<script>
+import categories from '@/Data/categories';
+
+export default {
+  props: ['priceFrom', 'priceTo', 'categoryId'],
+  computed: {
+    currentPriceFrom: {
+      get() {
+        return this.priceFrom;
+      },
+      set(value) {
+        this.$emit('update:priceFrom', value);
+      },
+    },
+    categories() {
+      return categories;
+    },
+  },
+};
+</script>
 
 <style>
 .sr-only {
