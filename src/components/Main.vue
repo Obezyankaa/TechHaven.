@@ -15,7 +15,7 @@
                 </span>
             </div>
             <div class="content__catalog">
-                <ProductFilterVue :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync="filterCategoryId"/>
+                <ProductFilterVue :category-color.sync="filterCategoryColor" :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync="filterCategoryId"/>
                 <ProductListVue :products="productss"/>
             </div>
             <BasePaginationVue v-model="page" :count="countProducts" :perPage="productsPerPage" :products="products" />
@@ -36,6 +36,7 @@ export default {
       filterPriceFrom: 0,
       filterPriceTo: 0,
       filterCategoryId: 0,
+      filterCategoryColor: 0,
       page: 1,
       productsPerPage: 6,
     };
@@ -60,6 +61,11 @@ export default {
 
       if (this.filterCategoryId > 0) {
         filtereProducts = filtereProducts.filter((el) => el.categoriesId === this.filterCategoryId);
+      }
+
+      if (this.filterCategoryColor > 0) {
+        // eslint-disable-next-line max-len
+        filtereProducts = filtereProducts.filter((el) => el.categoriesColor === this.filterCategoryColor);
       }
       return filtereProducts;
     },

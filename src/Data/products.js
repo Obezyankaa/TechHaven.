@@ -2,6 +2,7 @@ export default [
   {
     id: 1,
     categoriesId: 1,
+    categoriesColor: 2,
     title: 'Худи утеплённый хаки',
     price: 7490,
     image: '/img/imageBtb/btb1.jpeg',
@@ -21,6 +22,7 @@ export default [
   {
     id: 2,
     categoriesId: 1,
+    categoriesColor: 1,
     title: 'Худи утеплённый с заниженной линией плеч голубой',
     price: 7490,
     image: '/img/imageBtb/btb2.jpeg',
@@ -28,6 +30,7 @@ export default [
   {
     id: 3,
     categoriesId: 1,
+    categoriesColor: 2,
     title: 'Худи утеплённый оливковый',
     price: 7490,
     image: '/img/imageBtb/btb3.jpeg',
@@ -35,19 +38,23 @@ export default [
   {
     id: 4,
     categoriesId: 1,
-    title: 'Худи утеплённый оливковый',
+    categoriesColor: 5,
+    title: 'Худи утеплённый мятный',
     price: 7490,
     image: '/img/imageBtb/btb4.jpeg',
   },
   {
     id: 5,
     categoriesId: 1,
+    categoriesColor: 3,
     title: 'Худи утеплённый лавандовый',
     price: 7490,
     image: '/img/imageBtb/btb5.jpeg',
   },
   {
     id: 6,
+    categoriesId: 1,
+    categoriesColor: 4,
     title: 'Худи утеплённый светло-бежевый',
     price: 7490,
     image: '/img/imageBtb/btb6.jpeg',
