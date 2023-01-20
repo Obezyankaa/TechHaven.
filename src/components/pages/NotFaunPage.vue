@@ -15,10 +15,10 @@
 }
 .block__link {
     width: 300px;
-        margin-top: 40px;
-        padding: 10px;
-        border-radius: 4px;
-        text-align: center;
-        background-color: bisque;
+    margin-top: 40px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: bisque;
 }
 </style>

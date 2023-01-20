@@ -2,7 +2,7 @@
 <template>
     <div>
         <HeaderVue />
-        <MainVue :products="products"  @gotoPage="(pageName, pageParams) => $emit('gotoPage', pageName, pageParams)"/>
+        <MainVue :products="products" />
         <FooterVue />
     </div>
 </template>

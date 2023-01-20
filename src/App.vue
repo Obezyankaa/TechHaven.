@@ -1,12 +1,13 @@
 <!-- eslint-disable max-len -->
 <template>
-    <component :is="currentPageComponents" :page-params="currentPageParams"  @gotoPage="(pageName, pageParams) => gotoPage(pageName, pageParams)"/>
+    <component :is="currentPageComponents" :page-params="currentPageParams" />
 </template>
 
 <script>
 import MainPageS from './components/pages/MainPage.vue';
 import ProductPage from './components/pages/ProductPage.vue';
 import NotFaunPage from './components/pages/NotFaunPage.vue';
+import eventBus from './eventBus';
 
 const router = {
   main: 'MainPageS',
@@ -34,6 +35,9 @@ export default {
     currentPageComponents() {
       return router[this.currentPage] || 'NotFaunPage';
     },
+  },
+  created() {
+    eventBus.$on('gotoPage', (pageName, pageParams) => this.gotoPage(pageName, pageParams));
   },
 };
 </script>

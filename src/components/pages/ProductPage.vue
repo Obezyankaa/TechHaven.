@@ -10,12 +10,12 @@
         <div class="content__top">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="index.html">
+                    <a class="breadcrumbs__link" href="#" @click.prevent="gotoPage('main')">
                         Каталог
                     </a>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="#">
+                    <a class="breadcrumbs__link" href="#" @click.prevent="gotoPage('main')">
                         {{ pageProduct.line }}
                     </a>
                 </li>
@@ -64,7 +64,7 @@
                 <div class="item__form">
                     <form class="form" action="#" method="POST">
                         <b class="item__price">
-                            {{ pageProduct.price }} ₽
+                            {{ pageProduct.price | numberFormat}} ₽
                         </b>
 
                         <fieldset class="form__block flexColor">
@@ -198,9 +198,15 @@
 import HeaderVuePage from '@/components/Header.vue';
 import FooterVuePage from '@/components/Footer.vue';
 import categoriesColor from '@/Data/categoriesColor';
+import gotoPage from '@/helpers/gotoPage';
+import numberFormat from '@/helpers/numberFormat';
 
 export default {
   props: ['pageParams'],
+
+  filters: {
+    numberFormat,
+  },
   data() {
     return {
       categoriesColor,
@@ -209,6 +215,10 @@ export default {
   components: {
     HeaderVuePage, FooterVuePage,
   },
+  methods: {
+    gotoPage,
+  },
+
 };
 </script>
 

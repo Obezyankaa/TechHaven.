@@ -16,7 +16,7 @@
             </div>
             <div class="content__catalog">
                 <ProductFilterVue :category-color.sync="filterCategoryColor" :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync="filterCategoryId"/>
-                <ProductListVue :products="productss"  @gotoPage="(pageName, pageParams) => $emit('gotoPage', pageName, pageParams)"/>
+                <ProductListVue :products="productss"/>
             </div>
             <BasePaginationVue v-model="page" :count="countProducts" :perPage="productsPerPage" :products="products" />
 
