@@ -1,28 +1,39 @@
 <!-- eslint-disable max-len -->
-<!-- eslint-disable vuejs-accessibility/label-has-for -->
 <template>
-    <section>
-      <HeaderVue />
-      <MainVue :products="products" />
-      <FooterVue />
-    </section>
+    <component :is="currentPageComponents" :page-params="currentPageParams"  @gotoPage="(pageName, pageParams) => gotoPage(pageName, pageParams)"/>
 </template>
 
 <script>
-import HeaderVue from './components/Header.vue';
-import products from './Data/products';
-import FooterVue from './components/Footer.vue';
-import MainVue from './components/Main.vue';
+import MainPageS from './components/pages/MainPage.vue';
+import ProductPage from './components/pages/ProductPage.vue';
+import NotFaunPage from './components/pages/NotFaunPage.vue';
+
+const router = {
+  main: 'MainPageS',
+  product: 'ProductPage',
+};
 
 export default {
   components: {
-    HeaderVue, FooterVue, MainVue,
+    MainPageS, ProductPage, NotFaunPage,
   },
   name: 'App',
   data() {
     return {
-      products,
+      currentPage: 'main',
+      currentPageParams: {},
     };
+  },
+  methods: {
+    gotoPage(pageName, pageParams) {
+      this.currentPage = pageName;
+      this.currentPageParams = pageParams || {};
+    },
+  },
+  computed: {
+    currentPageComponents() {
+      return router[this.currentPage] || 'NotFaunPage';
+    },
   },
 };
 </script>

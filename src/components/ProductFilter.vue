@@ -476,7 +476,6 @@ export default {
     -webkit-transition: all .2s ease;
     transition: all .2s ease
 }
-
 .colors__value {
     display: block;
     width: 20px;
