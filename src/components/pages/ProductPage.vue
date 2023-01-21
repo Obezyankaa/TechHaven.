@@ -64,16 +64,16 @@
                 <div class="item__form">
                     <form class="form" action="#" method="POST">
                         <b class="item__price">
-                            {{ pageProduct.price | numberFormat}} ₽
+                            {{ pageProduct.price | numberFormat }} ₽
                         </b>
 
                         <fieldset class="form__block flexColor">
                             <legend class="form__legend">Цвет:</legend>
-                            <ul class="colors" v-for="(color) in categoriesColor" :key="color.id">
+                            <ul class="colors" v-for="(color) in colotPage" :key="color.id">
                                 <li class="colors__item">
                                     <label class="colors__label">
-                                        <input class="colors__radio sr-only" type="radio" name="color-item" value="blue">
-                                        <span class="colors__value" :style="`background-color: ${color.value};`" >
+                                        <input class="colors__radio sr-only" type="radio" name="color-item" :value="color.index">
+                                        <span class="colors__value" :style="`background-color: rgb(${color});`" >
                                         </span>
                                     </label>
                                 </li>
@@ -197,7 +197,6 @@
 <script>
 import HeaderVuePage from '@/components/Header.vue';
 import FooterVuePage from '@/components/Footer.vue';
-import categoriesColor from '@/Data/categoriesColor';
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
 
@@ -207,16 +206,17 @@ export default {
   filters: {
     numberFormat,
   },
-  data() {
-    return {
-      categoriesColor,
-    };
-  },
   components: {
     HeaderVuePage, FooterVuePage,
   },
   methods: {
     gotoPage,
+  },
+  computed: {
+    colotPage() {
+      const colorPage = this.pageParams.id.color;
+      return colorPage;
+    },
   },
 
 };

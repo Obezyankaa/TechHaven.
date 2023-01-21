@@ -20,24 +20,10 @@
         {{ product.price | numberFormat }} ₽
     </span>
             <ul class="colors colors--black">
-                <li class="colors__item">
+                <li class="colors__item" v-for="categoryColor in colorArr" :key="categoryColor.index">
                     <label class="colors__label">
-                        <input class="colors__radio sr-only" type="radio" value="#F0F0F0">
-                        <span class="colors__value" style="background-color: #F0F0F0;">
-                        </span>
-                    </label>
-                </li>
-                <li class="colors__item">
-                    <label class="colors__label">
-                        <input class="colors__radio sr-only" type="radio" value="#8BE000">
-                        <span class="colors__value" style="background-color: #8BE000;">
-                        </span>
-                    </label>
-                </li>
-                <li class="colors__item">
-                    <label class="colors__label">
-                        <input class="colors__radio sr-only" type="radio" value="#73B6EA">
-                        <span class="colors__value" style="background-color: #73B6EA;">
+                        <input class="colors__radio sr-only" type="radio" :value="categoryColor.index">
+                        <span class="colors__value" :style="`background-color:rgb(${categoryColor});`">
                         </span>
                     </label>
                 </li>
@@ -53,15 +39,16 @@ export default {
   filters: {
     numberFormat,
   },
-  data() {
-    return {
-      color: '#F0F0F0',
-    };
-  },
   methods: {
     gotoPage,
   },
   props: ['product'],
+  computed: {
+    colorArr() {
+      const colorArr = this.product.color;
+      return colorArr;
+    },
+  },
 };
 </script>
 
