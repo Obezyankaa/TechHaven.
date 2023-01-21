@@ -6,9 +6,9 @@
 <template>
 <div>
     <div id="test">
-        <a class="catalog__pic test2" href="#" @click.prevent="gotoPage('product', { id:product })">
+        <router-link class="catalog__pic test2" :to="{name: 'product', params:{id: product.id}}" >
             <img :src="product.image" :alt="product.title">
-        </a>
+        </router-link>
     </div>
     <h3 class="catalog__title">
         <a href="#">

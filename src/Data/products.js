@@ -30,6 +30,8 @@ export default [
     color: ['113, 154, 200', '238, 130, 238'],
     price: 7490,
     image: '/img/imageBtb/btb2.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 3,
@@ -39,6 +41,8 @@ export default [
     title: 'Худи утеплённый оливковый',
     price: 7490,
     image: '/img/imageBtb/btb3.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 4,
@@ -48,6 +52,8 @@ export default [
     title: 'Худи утеплённый мятный',
     price: 7490,
     image: '/img/imageBtb/btb4.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 5,
@@ -57,6 +63,8 @@ export default [
     title: 'Худи утеплённый лавандовый',
     price: 7490,
     image: '/img/imageBtb/btb5.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 6,
@@ -66,6 +74,8 @@ export default [
     title: 'Худи утеплённый светло-бежевый',
     price: 7490,
     image: '/img/imageBtb/btb6.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 7,
@@ -74,6 +84,8 @@ export default [
     title: 'Худи утеплённый темно-серый',
     price: 7490,
     image: '/img/imageBtb/btb7.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 8,
@@ -82,6 +94,8 @@ export default [
     title: 'Худи утеплённый бежевый',
     price: 7490,
     image: '/img/imageBtb/btb8.jpeg',
+    sizeText: 'Размеры',
+
   },
   {
     id: 9,
@@ -90,6 +104,7 @@ export default [
     title: 'Рюкзак Born To Be City чёрный',
     price: 11990,
     image: '/img/imageBtb/btb9.jpeg',
+
   },
   {
     id: 10,

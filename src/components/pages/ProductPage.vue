@@ -6,22 +6,22 @@
 <div>
  <HeaderVuePage />
   <section>
-    <div class="content container" v-for="(pageProduct) in pageParams" :key="pageProduct.id">
+    <div class="content container">
         <div class="content__top">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="#" @click.prevent="gotoPage('main')">
+                    <router-link class="breadcrumbs__link" :to="{name: 'main'}">
                         Каталог
-                    </a>
+                    </router-link>
                 </li>
                 <li class="breadcrumbs__item">
-                    <a class="breadcrumbs__link" href="#" @click.prevent="gotoPage('main')">
-                        {{ pageProduct.line }}
-                    </a>
+                    <router-link class="breadcrumbs__link" :to="{name: 'main'}">
+                        {{ category.title }}
+                    </router-link>
                 </li>
                 <li class="breadcrumbs__item">
                     <a class="breadcrumbs__link">
-                        {{ pageProduct.title }}
+                        {{ product.title }}
                     </a>
                 </li>
             </ul>
@@ -30,46 +30,46 @@
         <section class="item">
             <div class="item__pics pics">
                 <div class="pics__wrapper">
-                    <img width="570" height="570" :src="pageProduct.image" :alt="pageProduct.title" :srcset="`${pageProduct.image} 2x`">
+                    <img width="570" height="570" :src="product.image" :alt="product.title" :srcset="`${product.image} 2x`">
                 </div>
                 <ul class="pics__list">
                     <li class="pics__item">
                         <a href="" class="pics__link pics__link--current">
-                            <img width="98" height="98" :src="pageProduct.imag2" :alt="pageProduct.title" :srcset="`${pageProduct.image2} 2x`">
+                            <img width="98" height="98" :src="product.imag2" :alt="product.title" :srcset="`${product.image2} 2x`">
                         </a>
                     </li>
                     <li class="pics__item">
                         <a href="" class="pics__link">
-                            <img width="98" height="98" :src="pageProduct.image3" :alt="pageProduct.title" :srcset="`${pageProduct.image3} 2x`">
+                            <img width="98" height="98" :src="product.image3" :alt="product.title" :srcset="`${product.image3} 2x`">
                         </a>
                     </li>
                     <li class="pics__item">
                         <a href="" class="pics__link">
-                            <img width="98" height="98" :src="pageProduct.image4" :alt="pageProduct.title" :srcset="`${pageProduct.image4} 2x`">
+                            <img width="98" height="98" :src="product.image4" :alt="product.title" :srcset="`${product.image4} 2x`">
                         </a>
                     </li>
                     <li class="pics__item">
                         <a class="pics__link" href="#">
-                            <img width="98" height="98" :src="pageProduct.image5" :alt="pageProduct.title" :srcset="`${pageProduct.image5} 2x`">
+                            <img width="98" height="98" :src="product.image5" :alt="product.title" :srcset="`${product.image5} 2x`">
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="item__info">
-                <span class="item__code">Артикул: {{ pageProduct.articleТumber }}</span>
+                <span class="item__code">Артикул: {{ product.articleТumber }}</span>
                 <h2 class="item__title">
-                    {{ pageProduct.title }}
+                    {{ product.title }}
                 </h2>
                 <div class="item__form">
                     <form class="form" action="#" method="POST">
                         <b class="item__price">
-                            {{ pageProduct.price | numberFormat }} ₽
+                            {{ product.price | numberFormat }} ₽
                         </b>
 
                         <fieldset class="form__block flexColor">
                             <legend class="form__legend">Цвет:</legend>
-                            <ul class="colors" v-for="(color) in colotPage" :key="color.id">
+                            <ul class="colors" v-for="(color) in product.color" :key="color.id">
                                 <li class="colors__item">
                                     <label class="colors__label">
                                         <input class="colors__radio sr-only" type="radio" name="color-item" :value="color.index">
@@ -81,7 +81,7 @@
                         </fieldset>
 
                         <fieldset class="form__block">
-                            <legend class="form__legend">{{ pageProduct.sizeText }}:</legend>
+                            <legend class="form__legend">{{ product.sizeText }}:</legend>
 
                             <ul class="sizes sizes--primery">
                                 <li class="sizes__item">
@@ -199,24 +199,30 @@ import HeaderVuePage from '@/components/Header.vue';
 import FooterVuePage from '@/components/Footer.vue';
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
+import categories from '@/Data/categories';
+import products from '@/Data/products';
 
 export default {
-  props: ['pageParams'],
-
   filters: {
     numberFormat,
   },
   components: {
     HeaderVuePage, FooterVuePage,
   },
+  computed: {
+    product() {
+      return products.find((product) => product.id === +this.$route.params.id);
+    },
+    category() {
+      return categories.find((category) => category.id === this.product.categoriesId);
+    },
+    // colotPage() {
+    //   const colorPage = this.pageParams.id.color;
+    //   return colorPage;
+    // },
+  },
   methods: {
     gotoPage,
-  },
-  computed: {
-    colotPage() {
-      const colorPage = this.pageParams.id.color;
-      return colorPage;
-    },
   },
 
 };
