@@ -62,7 +62,7 @@
                     {{ product.title }}
                 </h2>
                 <div class="item__form">
-                    <form class="form" action="#" method="POST">
+                    <form class="form" action="#" method="POST" @submit.prevent="addToCart">
                         <b class="item__price">
                             {{ product.price | numberFormat }} ₽
                         </b>
@@ -111,10 +111,10 @@
                             </ul>
                         </fieldset>°
                         <div class="item__row">
-                            <div class="form__counter">
-                                <button type="button" aria-label="Убрать один товар">-</button>
-                                <input type="text" value="1" name="count">
-                                <button type="button" aria-label="Добавить один товар">+</button>
+                            <div class="form__counter" :productAmaut="productAmaut">
+                                <button class="form__btn" :disabled="isButtonDisabled" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
+                                <input type="text" v-model.number="productAmaut">
+                                <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
                             </div>
                             <button class="button button--primery" type="submit">
                                 В корзину
@@ -191,6 +191,12 @@ import categories from '@/Data/categories';
 import products from '@/Data/products';
 
 export default {
+  data() {
+    return {
+      productAmaut: 1,
+      isButtonDisabled: false,
+    };
+  },
   filters: {
     numberFormat,
   },
@@ -204,19 +210,33 @@ export default {
     category() {
       return categories.find((category) => category.id === this.product.categoriesId);
     },
-    // colotPage() {
-    //   const colorPage = this.pageParams.id.color;
-    //   return colorPage;
-    // },
   },
   methods: {
     gotoPage,
+    addToCart() {
+      this.$store.commit(
+        'addProductToCart',
+        { productId: this.product.id, amount: this.productAmaut },
+      );
+    },
+    coutPlus() {
+      // eslint-disable-next-line no-return-assign
+      return this.productAmaut += 1;
+    },
+    countMinus() {
+      // eslint-disable-next-line no-return-assign
+      return this.productAmaut -= 1;
+    },
   },
 
 };
 </script>
 
 <style>
+.form__btn {
+    cursor: pointer;
+}
+
 .content {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
