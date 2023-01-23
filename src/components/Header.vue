@@ -13,17 +13,20 @@
             8 800 600 90 09
         </a>
 
-        <a class="header__cart" href="cart.html" aria-label="Корзина с товарами">
-            <svg width="30" height="21" fill="currentColor">
-                <use xlink:href="#icon-cart"></use>
-            </svg>
-            <span class="header__count" aria-label="Количество товаров">3</span>
-        </a>
+      <cartIndicator />
     </div>
 </header>
 </template>
 
-<script></script>
+<script>
+import cartIndicator from '@/components/cartIndicator.vue';
+
+export default {
+  components: {
+    cartIndicator,
+  },
+};
+</script>
 
 <style>
 .header {
@@ -66,21 +69,4 @@
     color: #fff
 }
 
-.header__cart {
-    position: relative;
-    height: 27px;
-    color: #fff
-}
-
-.header__count {
-    position: absolute;
-    top: -5px;
-    right: -3px;
-    background-color: #9eff00;
-    padding: 3px;
-    font-family: "PressStart";
-    font-size: 7px;
-    line-height: 1;
-    color: #222
-}
 </style>
