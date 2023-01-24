@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cartProducts: [{ productId: 1, amount: 1 }],
+    cartProducts: [],
   },
   mutations: {
     addProductToCart(state, payload) {
@@ -20,6 +20,16 @@ export default new Vuex.Store({
           amount: payload.amount,
         });
       }
+    },
+    updateCartProductAmout(state, { productId, amount }) {
+      const item = state.cartProducts.find((el) => el.productId === productId);
+
+      if (item) {
+        item.amount = amount;
+      }
+    },
+    deletCartProduct(state, productId) {
+      state.cartProducts = state.cartProducts.filter((el) => el.productId !== productId);
     },
   },
   getters: {

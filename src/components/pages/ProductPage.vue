@@ -112,7 +112,7 @@
                         </fieldset>°
                         <div class="item__row">
                             <div class="form__counter" :productAmaut="productAmaut">
-                                <button class="form__btn" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
+                                <button class="form__btn" :disabled="isDisabled" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
                                 <input type="text" v-model.number="productAmaut">
                                 <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
                             </div>
@@ -194,7 +194,6 @@ export default {
   data() {
     return {
       productAmaut: 1,
-      isButtonDisabled: true,
     };
   },
   filters: {
@@ -209,6 +208,14 @@ export default {
     },
     category() {
       return categories.find((category) => category.id === this.product.categoriesId);
+    },
+    isDisabled() {
+      const count = this.productAmaut;
+      let resultDisablerd;
+      if (count === 1) {
+        resultDisablerd = true;
+      }
+      return resultDisablerd;
     },
   },
   methods: {
