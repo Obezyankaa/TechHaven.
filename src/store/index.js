@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import products from '@/Data/products';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    cartProducts: [{ productId: 1, amount: 2 }],
+    cartProducts: [{ productId: 1, amount: 1 }],
   },
   mutations: {
     addProductToCart(state, payload) {
@@ -21,4 +22,19 @@ export default new Vuex.Store({
       }
     },
   },
+  getters: {
+    cartDetailroduct(state) {
+      return state.cartProducts.map((item) => ({
+        ...item,
+        product: products.find((el) => el.id === item.productId),
+      }));
+    },
+    catrTotalPrice(state, getters) {
+      return getters.cartDetailroduct.reduce((acc, el) => (el.product.price * el.amount) + acc, 0);
+    },
+    counterPrice(state, getters) {
+      return getters.cartDetailroduct.length;
+    },
+  },
+
 });

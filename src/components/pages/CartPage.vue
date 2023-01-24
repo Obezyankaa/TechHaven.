@@ -22,7 +22,10 @@
             Корзина
         </h1>
         <span class="content__info">
-            3 товара
+            <span>
+            {{ conutPrice }}
+            </span>
+            товара
         </span>
     </div>
 
@@ -30,139 +33,46 @@
     <form class="cart__form form">
         <div class="cart__field">
             <ul class="cart__list">
-                <li class="cart__item product">
+                <li class="cart__item product" v-for="item in products" :key="item.productId">
                     <div class="product__pic">
-                        <img src="img/phone-square-3.jpg" width="120" height="120" srcset="img/phone-square-3@2x.jpg 2x"
-                            alt="Название товара">
+                        <img :src="item.product.image" width="120" height="120" :alt="item.product.title">
                     </div>
                     <h3 class="product__title">
-                        Смартфон Xiaomi Redmi Note 7 Pro 6/128GB
+                        {{ item.product.title }}
                     </h3>
-                    <p class="product__info">
-                        Объем: <span>128GB</span>
-                    </p>
+                    <h5>
+                        {{ item.sizeText }}
+                    </h5>
                     <span class="product__code">
-                        Артикул: 1501230
+                        {{ item.product.articleТumber }}
                     </span>
 
                     <div class="product__counter form__counter">
                         <button type="button" aria-label="Убрать один товар">
-                            <svg width="10" height="10" fill="currentColor">
-                                <use xlink:href="#icon-minus"></use>
-                            </svg>
+                           -
                         </button>
 
-                        <input type="text" value="1" name="count">
+                        <input type="text" :value="item.amount" name="count">
 
                         <button type="button" aria-label="Добавить один товар">
-                            <svg width="10" height="10" fill="currentColor">
-                                <use xlink:href="#icon-plus"></use>
-                            </svg>
+                           +
                         </button>
                     </div>
 
                     <b class="product__price">
-                        18 990 ₽
+                        {{ (item.amount * item.product.price) | numberFormat }} ₽
                     </b>
 
                     <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины">
-                        <svg width="20" height="20" fill="currentColor">
-                            <use xlink:href="#icon-close"></use>
+                        <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="m4.015 5.494h-.253c-.413 0-.747-.335-.747-.747s.334-.747.747-.747h5.253v-1c0-.535.474-1 1-1h4c.526 0 1 .465 1 1v1h5.254c.412 0 .746.335.746.747s-.334.747-.746.747h-.254v15.435c0 .591-.448 1.071-1 1.071-2.873 0-11.127 0-14 0-.552 0-1-.48-1-1.071zm14.5 0h-13v15.006h13zm-4.25 2.506c-.414 0-.75.336-.75.75v8.5c0 .414.336.75.75.75s.75-.336.75-.75v-8.5c0-.414-.336-.75-.75-.75zm-4.5 0c-.414 0-.75.336-.75.75v8.5c0 .414.336.75.75.75s.75-.336.75-.75v-8.5c0-.414-.336-.75-.75-.75zm3.75-4v-.5h-3v.5z"
+                                fill-rule="nonzero" />
                         </svg>
                     </button>
                 </li>
 
-                <li class="cart__item product">
-                    <div class="product__pic">
-                        <img src="img/pic-square-2.jpg" width="120" height="120" srcset="img/pic-square-2@2x.jpg 2x"
-                            alt="Название товара">
-                    </div>
-                    <h3 class="product__title">
-                        Гироскутер Razor Hovertrax 2.0
-                    </h3>
-                    <p class="product__info product__info--color">
-                        Цвет:
-                        <span>
-                            <i style="background-color: #73B6EA"></i>
-                            Нежно-голубой
-                        </span>
-                    </p>
-                    <span class="product__code">
-                        Артикул: 1501230
-                    </span>
-
-                    <div class="product__counter form__counter">
-                        <button type="button" aria-label="Убрать один товар">
-                            <svg width="10" height="10" fill="currentColor">
-                                <use xlink:href="#icon-minus"></use>
-                            </svg>
-                        </button>
-
-                        <input type="text" value="1" name="count">
-
-                        <button type="button" aria-label="Добавить один товар">
-                            <svg width="10" height="10" fill="currentColor">
-                                <use xlink:href="#icon-plus"></use>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <b class="product__price">
-                        4 990 ₽
-                    </b>
-
-                    <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины">
-                        <svg width="20" height="20" fill="currentColor">
-                            <use xlink:href="#icon-close"></use>
-                        </svg>
-                    </button>
-                </li>
-
-                <li class="cart__item product">
-                    <div class="product__pic">
-                        <img src="img/pic-square-3.jpg" width="120" height="120" srcset="img/pic-square-3@2x.jpg 2x"
-                            alt="Название товара">
-                    </div>
-                    <h3 class="product__title">
-                        Электрический дрифт-карт Razor Lil’ Crazy
-                    </h3>
-                    <p class="product__info product__info--color">
-                        Цвет:
-                        <span>
-                            <i style="background-color: #FF6B00"></i>
-                            Оранжевый
-                        </span>
-                    </p>
-                    <span class="product__code">
-                        Артикул: 1501230
-                    </span>
-
-                    <div class="product__counter form__counter">
-                        <button type="button" aria-label="Убрать один товар">
-                            <svg width="10" height="10" fill="currentColor">
-                                <use xlink:href="#icon-minus"></use>
-                            </svg>
-                        </button>
-
-                        <input type="text" value="1" name="count">
-
-                        <button type="button" aria-label="Добавить один товар">
-                            <svg width="10" height="10" fill="currentColor">
-                                <use xlink:href="#icon-plus"></use>
-                            </svg>
-                        </button>
-                    </div>
-
-                    <b class="product__price">
-                        8 990 ₽
-                    </b>
-
-                    <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины">
-                        <svg width="20" height="20" fill="currentColor">
-                            <use xlink:href="#icon-close"></use>
-                        </svg>
-                    </button>
-                </li>
             </ul>
         </div>
 
@@ -171,7 +81,7 @@
                 Мы&nbsp;посчитаем стоимость доставки на&nbsp;следующем этапе
             </p>
             <p class="cart__price">
-                Итого: <span>32 970 ₽</span>
+                Итого: <span>{{ sumPrice | numberFormat }} ₽</span>
             </p>
 
             <button class="cart__button button button--primery" type="submit">
@@ -189,10 +99,23 @@
 <script>
 import headerCarPage from '@/components/Header.vue';
 import footerCarPage from '@/components/Footer.vue';
+import numberFormat from '@/helpers/numberFormat';
+import { mapGetters } from 'vuex';
 
 export default {
+  filters: {
+    numberFormat,
+  },
   components: {
     headerCarPage, footerCarPage,
+  },
+  computed: {
+    ...mapGetters(
+      { products: 'cartDetailroduct', sumPrice: 'catrTotalPrice', conutPrice: 'counterPrice' },
+    ),
+    // products() {
+    //   return this.$store.getters.cartDetailroduct;
+    // },
   },
 };
 
@@ -319,6 +242,10 @@ a {
     font-weight: 300;
     line-height: 1;
     color: #9d9d9d
+}
+
+.content__info span {
+    font-weight: 600;
 }
 
 .content__catalog {
