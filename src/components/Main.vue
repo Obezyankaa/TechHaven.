@@ -5,6 +5,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <div>
+      <div class="SEX"></div>
+        <LoadingVue v-if="productLoading" />
         <main class="content container">
             <div class="content__top content__top--catalog">
                 <h1 class="content__title">
@@ -14,12 +16,15 @@
                     {{ products.length }}
                 </span>
             </div>
+          <div v-if="productErrorData">
+          <h2>Ошибка соединения, плиз перезагрузите страницу ^_^</h2>
+          <button @click.prevent="loadProducts">попробовать еще раз</button>
+          </div>
             <div class="content__catalog">
                 <ProductFilterVue :category-color.sync="filterCategoryColor" :price-from.sync="filterPriceFrom" :price-to.sync="filterPriceTo" :category-id.sync="filterCategoryId"/>
                 <ProductListVue :products="productss"/>
             </div>
             <BasePaginationVue v-model="page" :count="countProducts" :perPage="productsPerPage" :products="products" />
-
         </main>
     </div>
 </template>
@@ -30,6 +35,7 @@ import { API_URL } from '@/config';
 import ProductFilterVue from './ProductFilter.vue';
 import ProductListVue from './ProductList.vue';
 import BasePaginationVue from './BasePagination.vue';
+import LoadingVue from './pages/LoadingPage.vue';
 
 export default {
   data() {
@@ -41,6 +47,8 @@ export default {
       page: 1,
       productsPerPage: 6,
       productsData: null,
+      productLoading: false,
+      productErrorData: false,
     };
   },
   props: ['products'],
@@ -48,6 +56,7 @@ export default {
     ProductFilterVue,
     ProductListVue,
     BasePaginationVue,
+    LoadingVue,
   },
   computed: {
     productss() {
@@ -64,6 +73,8 @@ export default {
   },
   methods: {
     loadProducts() {
+      this.productLoading = true;
+      this.productErrorData = false;
       clearTimeout(this.loadProductsTimer);
       this.loadProductsTimer = setTimeout(() => {
         axios.get(`${API_URL}/api/products`, {
@@ -77,7 +88,11 @@ export default {
           },
         })
           // eslint-disable-next-line no-return-assign, no-shadow
-          .then((response) => this.productsData = response.data);
+          .then((response) => this.productsData = response.data)
+          // eslint-disable-next-line no-return-assign
+          .catch(() => this.productErrorData = true)
+          // eslint-disable-next-line no-return-assign
+          .then(() => this.productLoading = false);
       }, 0);
     },
   },
