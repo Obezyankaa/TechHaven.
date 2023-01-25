@@ -34,7 +34,7 @@
                     <li class="colors__item"  v-for="categoryColor in categoriesColor" :key="categoryColor.id">
                         <label class="colors__label">
                             <input class="colors__radio sr-only" type="radio" :value="categoryColor.id" v-model.number="currentCategoryColor">
-                            <span class="colors__value" :style="`background-color: ${categoryColor.value};`" >
+                            <span class="colors__value" :style="`background-color: ${categoryColor.code}`" >
                             </span>
                         </label>
                     </li>
@@ -113,8 +113,8 @@
 </template>
 
 <script>
-import categories from '@/Data/categories';
-import categoriesColor from '../Data/categoriesColor';
+import axios from 'axios';
+import { API_URL } from '@/config';
 
 export default {
   data() {
@@ -123,15 +123,17 @@ export default {
       currentPriceTo: 0,
       currentCategoryId: 0,
       currentCategoryColor: 0,
+      categoriesData: null,
+      categoriesDataColor: null,
     };
   },
   props: ['priceFrom', 'priceTo', 'categoryId', 'categoryColor'],
   computed: {
     categories() {
-      return categories;
+      return this.categoriesData ? this.categoriesData.items : [];
     },
     categoriesColor() {
-      return categoriesColor;
+      return this.categoriesDataColor ? this.categoriesDataColor.items : [];
     },
   },
   watch: {
@@ -161,6 +163,20 @@ export default {
       this.$emit('update:categoryId', 0);
       this.$emit('update:categoryColor', 0);
     },
+    loadCategories() {
+      axios.get(`${API_URL}/api/productCategories`)
+        // eslint-disable-next-line no-return-assign
+        .then((response) => this.categoriesData = response.data);
+    },
+    loadCategoriesColor() {
+      axios.get(`${API_URL}/api/colors`)
+        // eslint-disable-next-line no-return-assign
+        .then((response) => this.categoriesDataColor = response.data);
+    },
+  },
+  created() {
+    this.loadCategories();
+    this.loadCategoriesColor();
   },
 };
 </script>

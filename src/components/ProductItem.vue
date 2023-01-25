@@ -46,7 +46,6 @@ export default {
   computed: {
     colorArr() {
       const colorArr = this.product.colors;
-      console.log(colorArr.map((el) => el.code));
       return colorArr.map((el) => el.code);
     },
   },
