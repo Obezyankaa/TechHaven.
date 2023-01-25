@@ -6,7 +6,7 @@
 <div>
  <HeaderVuePage />
   <section>
-    <div class="content container">
+    <div class="content container" v-if="productData">
         <div class="content__top">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item">
@@ -187,13 +187,16 @@ import HeaderVuePage from '@/components/Header.vue';
 import FooterVuePage from '@/components/Footer.vue';
 import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
-import categories from '@/Data/categories';
-import products from '@/Data/products';
+import axios from 'axios';
+import { API_URL } from '@/config';
 
 export default {
   data() {
     return {
       productAmaut: 1,
+      productData: null,
+      productLoading: false,
+      productError: false,
     };
   },
   filters: {
@@ -204,10 +207,10 @@ export default {
   },
   computed: {
     product() {
-      return products.find((product) => product.id === +this.$route.params.id);
+      return this.productData;
     },
     category() {
-      return categories.find((category) => category.id === this.product.categoriesId);
+      return this.productData.category;
     },
     isDisabled() {
       const count = this.productAmaut;
@@ -234,6 +237,20 @@ export default {
       // eslint-disable-next-line no-return-assign
       return this.productAmaut -= 1;
     },
+    loadProduct() {
+      this.productLoading = true;
+      this.productError = false;
+      axios.get(`${API_URL}/api/products/${this.$route.params.id}`)
+        // eslint-disable-next-line no-return-assign
+        .then((response) => this.productData = response.data)
+        // eslint-disable-next-line no-return-assign
+        .catch(() => this.productError = true)
+        // eslint-disable-next-line no-return-assign
+        .then(() => this.productLoading = false);
+    },
+  },
+  created() {
+    this.loadProduct();
   },
 
 };
