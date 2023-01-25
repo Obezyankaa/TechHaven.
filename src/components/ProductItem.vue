@@ -20,10 +20,10 @@
         {{ product.price | numberFormat }} ₽
     </span>
             <ul class="colors colors--black">
-                <li class="colors__item" v-for="categoryColor in colorArr" :key="categoryColor.index">
+                <li class="colors__item" v-for="categoryColor in colorArr" :key="categoryColor">
                     <label class="colors__label">
-                        <input class="colors__radio sr-only" type="radio" :value="categoryColor.index">
-                        <span class="colors__value" :style="`background-color:rgb(${categoryColor});`">
+                        <input class="colors__radio sr-only" type="radio" :value="categoryColor">
+                        <span class="colors__value" :style="`background-color: ${categoryColor}`">
                         </span>
                     </label>
                 </li>
@@ -45,8 +45,9 @@ export default {
   props: ['product'],
   computed: {
     colorArr() {
-      const colorArr = this.product.color;
-      return colorArr;
+      const colorArr = this.product.colors;
+      console.log(colorArr.map((el) => el.code));
+      return colorArr.map((el) => el.code);
     },
   },
 };

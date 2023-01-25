@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ProductFilterVue from './ProductFilter.vue';
 import ProductListVue from './ProductList.vue';
 import products from '../Data/products';
@@ -39,6 +40,7 @@ export default {
       filterCategoryColor: 0,
       page: 1,
       productsPerPage: 6,
+      productsData: null,
     };
   },
   props: ['products'],
@@ -70,12 +72,31 @@ export default {
       return filtereProducts;
     },
     productss() {
-      const offser = (this.page - 1) * this.productsPerPage;
-      return this.filtereProducts.slice(offser, offser + this.productsPerPage);
+      return this.productsData ? this.productsData.items.map((product) => ({
+        ...product,
+        image: product.image.file.url,
+      })) : [];
+      // const offser = (this.page - 1) * this.productsPerPage;
+      // return this.filtereProducts.slice(offser, offser + this.productsPerPage);
     },
     countProducts() {
-      return this.filtereProducts.length;
+      return this.productsData ? this.productsData.pagination.total : 0;
     },
+  },
+  methods: {
+    loadProducts() {
+      axios.get(`https://vue-study.skillbox.cc/api/products?page=${this.page}&limit=${this.productsPerPage}`)
+        // eslint-disable-next-line no-return-assign, no-shadow
+        .then((response) => this.productsData = response.data);
+    },
+  },
+  watch: {
+    page() {
+      this.loadProducts();
+    },
+  },
+  created() {
+    this.loadProducts();
   },
 };
 </script>
