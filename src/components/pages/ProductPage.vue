@@ -6,7 +6,9 @@
 <div>
  <HeaderVuePage />
   <section>
-    <div class="content container" v-if="productData">
+    <div v-if="productLoading">Загрузка товаров...</div>
+    <div v-else-if="!productData">Ошибка загрузки товарa...</div>
+    <div class="content container" v-else>
         <div class="content__top">
             <ul class="breadcrumbs">
                 <li class="breadcrumbs__item">
@@ -30,34 +32,34 @@
         <section class="item">
             <div class="item__pics pics">
                 <div class="pics__wrapper">
-                    <img width="570" height="570" :src="product.image" :alt="product.title" :srcset="`${product.image} 2x`">
+                    <img width="570" height="570" :src="product.image.file.url" :alt="product.image.file.name">
                 </div>
                 <ul class="pics__list">
                     <li class="pics__item">
                         <a href="" class="pics__link pics__link--current">
-                            <img width="98" height="98" :src="product.imag2" :alt="product.title" :srcset="`${product.image2} 2x`">
+                            <img width="98" height="98" :src="product.image.file.url" :alt="product.image.file.name" >
                         </a>
                     </li>
                     <li class="pics__item">
                         <a href="" class="pics__link">
-                            <img width="98" height="98" :src="product.image3" :alt="product.title" :srcset="`${product.image3} 2x`">
+                            <img width="98" height="98" :src="product.image.file.url" :alt="product.image.file.name" >
                         </a>
                     </li>
                     <li class="pics__item">
                         <a href="" class="pics__link">
-                            <img width="98" height="98" :src="product.image4" :alt="product.title" :srcset="`${product.image4} 2x`">
+                            <img width="98" height="98" :src="product.image.file.url" :alt="product.image.file.name" >
                         </a>
                     </li>
                     <li class="pics__item">
                         <a class="pics__link" href="#">
-                            <img width="98" height="98" :src="product.image5" :alt="product.title" :srcset="`${product.image5} 2x`">
+                            <img width="98" height="98" :src="product.image.file.url" :alt="product.image.file.name" >
                         </a>
                     </li>
                 </ul>
             </div>
 
             <div class="item__info">
-                <span class="item__code">Артикул: {{ product.articleТumber }}</span>
+                <span class="item__code">Артикул: {{ product.slug }}</span>
                 <h2 class="item__title">
                     {{ product.title }}
                 </h2>
@@ -111,11 +113,12 @@
                             </ul>
                         </fieldset>°
                         <div class="item__row">
-                            <div class="form__counter" :productAmaut="productAmaut">
+                            <ButtonCountPage :product-counter.sync="productAmautCounter" />
+                            <!-- <div class="form__counter" :productAmaut="productAmaut">
                                 <button class="form__btn" :disabled="isDisabled" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
                                 <input type="text" v-model.number="productAmaut">
                                 <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
-                            </div>
+                            </div> -->
                             <button class="button button--primery" type="submit">
                                 В корзину
                             </button>
@@ -189,11 +192,12 @@ import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
 import axios from 'axios';
 import { API_URL } from '@/config';
+import ButtonCountPage from './ButtonCountPage.vue';
 
 export default {
   data() {
     return {
-      productAmaut: 1,
+      productAmautCounter: 1,
       productData: null,
       productLoading: false,
       productError: false,
@@ -203,10 +207,11 @@ export default {
     numberFormat,
   },
   components: {
-    HeaderVuePage, FooterVuePage,
+    HeaderVuePage, FooterVuePage, ButtonCountPage,
   },
   computed: {
     product() {
+    //   console.log(this.productData.image.file.name);
       return this.productData;
     },
     category() {
@@ -249,8 +254,16 @@ export default {
         .then(() => this.productLoading = false);
     },
   },
-  created() {
-    this.loadProduct();
+  // eslint-disable-next-line max-len
+  // в данном случае мы заменили хук created на динамическую запись в методе watch: он будет реагирать при нажатии на карточку, а так же менять карточки по ссылке
+  watch: {
+    // eslint-disable-next-line func-names
+    '$route.params.id': {
+      handler() {
+        this.loadProduct();
+      },
+      immediate: true,
+    },
   },
 
 };

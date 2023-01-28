@@ -4,8 +4,7 @@
 <!-- eslint-disable max-len -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div>
-      <div class="SEX"></div>
+    <div class="main">
         <LoadingVue v-if="productLoading" />
         <main class="content container">
             <div class="content__top content__top--catalog">

@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     ...mapGetters(
-      { products: 'cartDetailroduct', sumPrice: 'catrTotalPrice', conutPrice: 'counterPrice' },
+      { products: 'cartDetailProducts', sumPrice: 'catrTotalPrice', conutPrice: 'counterPrice' },
     ),
     // products() {
     //   return this.$store.getters.cartDetailroduct;
