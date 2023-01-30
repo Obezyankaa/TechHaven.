@@ -12,19 +12,13 @@
             {{ item.sizeText }}
         </h5>
         <span class="product__code">
-            {{ item.product.articleТumber }}
+            артикул: {{ item.product.product.id }}
         </span>
 
         <div class="product__counter form__counter">
-            <button type="button" aria-label="Убрать один товар">
-                -
-            </button>
-
+            <button type="button" aria-label="Убрать один товар">-</button>
             <input type="text" v-model.number="amount">
-
-            <button type="button" aria-label="Добавить один товар">
-                +
-            </button>
+            <button type="button" aria-label="Добавить один товар">+</button>
         </div>
 
         <b class="product__price">

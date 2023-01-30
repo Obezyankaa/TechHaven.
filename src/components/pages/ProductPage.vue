@@ -113,12 +113,11 @@
                             </ul>
                         </fieldset>°
                         <div class="item__row">
-                            <ButtonCountPage :product-counter.sync="productAmautCounter" />
-                            <!-- <div class="form__counter" :productAmaut="productAmaut">
+                            <div class="form__counter">
                                 <button class="form__btn" :disabled="isDisabled" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
-                                <input type="text" v-model.number="productAmaut">
+                                <input type="text" v-model.number="productAmautCounter">
                                 <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
-                            </div> -->
+                            </div>
                             <button class="button button--primery" type="submit">
                                 В корзину
                             </button>
@@ -192,7 +191,7 @@ import gotoPage from '@/helpers/gotoPage';
 import numberFormat from '@/helpers/numberFormat';
 import axios from 'axios';
 import { API_URL } from '@/config';
-import ButtonCountPage from './ButtonCountPage.vue';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -207,7 +206,7 @@ export default {
     numberFormat,
   },
   components: {
-    HeaderVuePage, FooterVuePage, ButtonCountPage,
+    HeaderVuePage, FooterVuePage,
   },
   computed: {
     product() {
@@ -218,7 +217,7 @@ export default {
       return this.productData.category;
     },
     isDisabled() {
-      const count = this.productAmaut;
+      const count = this.productAmautCounter;
       let resultDisablerd;
       if (count === 1) {
         resultDisablerd = true;
@@ -227,20 +226,18 @@ export default {
     },
   },
   methods: {
+    ...mapActions(['addProductToCart']),
     gotoPage,
     addToCart() {
-      this.$store.commit(
-        'addProductToCart',
-        { productId: this.product.id, amount: this.productAmaut },
-      );
+      this.addProductToCart({ productId: this.product.id, amount: this.productAmautCounter });
     },
     coutPlus() {
       // eslint-disable-next-line no-return-assign
-      return this.productAmaut += 1;
+      return this.productAmautCounter += 1;
     },
     countMinus() {
       // eslint-disable-next-line no-return-assign
-      return this.productAmaut -= 1;
+      return this.productAmautCounter -= 1;
     },
     loadProduct() {
       this.productLoading = true;
@@ -253,6 +250,7 @@ export default {
         // eslint-disable-next-line no-return-assign
         .then(() => this.productLoading = false);
     },
+
   },
   // eslint-disable-next-line max-len
   // в данном случае мы заменили хук created на динамическую запись в методе watch: он будет реагирать при нажатии на карточку, а так же менять карточки по ссылке
