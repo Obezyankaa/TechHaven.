@@ -118,9 +118,15 @@
                                 <input type="text" v-model.number="productAmautCounter">
                                 <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
                             </div>
-                            <button class="button button--primery" type="submit">
+                            <button class="button button--primery" type="submit" :disabled="productAddSending">
                                 В корзину
                             </button>
+                        </div>
+                        <div v-show="productAdded">
+                            товар добавлен в корзину
+                        </div>
+                        <div v-show="productAddSending">
+                            Добавляем товар в корзину...
                         </div>
                     </form>
                 </div>
@@ -200,6 +206,9 @@ export default {
       productData: null,
       productLoading: false,
       productError: false,
+
+      productAdded: false,
+      productAddSending: false,
     };
   },
   filters: {
@@ -229,7 +238,13 @@ export default {
     ...mapActions(['addProductToCart']),
     gotoPage,
     addToCart() {
-      this.addProductToCart({ productId: this.product.id, amount: this.productAmautCounter });
+      this.productAdded = false;
+      this.productAddSending = true;
+      this.addProductToCart({ productId: this.product.id, amount: this.productAmautCounter })
+        .then(() => {
+          this.productAdded = true;
+          this.productAddSending = false;
+        });
     },
     coutPlus() {
       // eslint-disable-next-line no-return-assign

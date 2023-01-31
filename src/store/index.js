@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-promise-executor-return */
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
@@ -20,7 +22,7 @@ export default new Vuex.Store({
         item.amount = amount;
       }
     },
-    deletCartProduct(state, productId) {
+    deleteCartProduct(state, productId) {
       state.cartProducts = state.cartProducts.filter((el) => el.productId !== productId);
     },
     updateUserAccessKey(state, accessKey) {
@@ -58,12 +60,11 @@ export default new Vuex.Store({
   },
   actions: {
     loadCart(context) {
-      axios
-        .get(`${API_URL}/api/baskets`, {
-          params: {
-            userAccessKey: context.state.userAccessKey,
-          },
-        })
+      return axios.get(`${API_URL}/api/baskets`, {
+        params: {
+          userAccessKey: context.state.userAccessKey,
+        },
+      })
         .then((response) => {
           if (!context.state.userAccessKey) {
             localStorage.setItem('userAccessKey', response.data.user.accessKey);
@@ -76,7 +77,28 @@ export default new Vuex.Store({
         });
     },
     addProductToCart(context, { productId, amount }) {
-      axios.post(`${API_URL}/api/baskets/products`, {
+      return (new Promise((resolve) => setTimeout(resolve, 1500)))
+        .then(() => axios.post(`${API_URL}/api/baskets/products`, {
+          productId,
+          quantity: amount,
+        }, {
+          params: {
+            userAccessKey: context.state.userAccessKey,
+          },
+        })
+          .then((response) => {
+            context.commit('updateCartProductsData', response.data.items);
+            context.commit('syncCartProducts');
+          }));
+    },
+
+    updateCartProductAmout(context, { productId, amount }) {
+      context.commit('updateCartProductsData', { productId, amount });
+
+      if (amount < 1) {
+        return;
+      }
+      return axios.put(`${API_URL}/api/baskets/products`, {
         productId,
         quantity: amount,
       }, {
@@ -86,6 +108,27 @@ export default new Vuex.Store({
       })
         .then((response) => {
           context.commit('updateCartProductsData', response.data.items);
+        })
+        .catch(() => {
+          context.commit('syncCartProducts');
+        });
+    },
+
+    deleteProductCart(context, { productId }) {
+      // context.commit('deleteCartProduct');
+
+      return axios.delete(`${API_URL}/api/baskets/products`, {
+        data: {
+          productId,
+        },
+        params: {
+          userAccessKey: context.state.userAccessKey,
+        },
+      })
+        .then((response) => {
+          context.commit('updateCartProductsData', response.data.items);
+        })
+        .catch(() => {
           context.commit('syncCartProducts');
         });
     },

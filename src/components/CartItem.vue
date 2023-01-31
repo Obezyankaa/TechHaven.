@@ -25,7 +25,7 @@
             {{ (item.amount * item.product.price) | numberFormat }} ₽
         </b>
 
-        <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины" @click.prevent="deletProduct(item.productId)">
+        <button class="product__del button-del" type="button" aria-label="Удалить товар из корзины" @click.prevent="deleteProduct(item.productId)">
             <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -38,7 +38,7 @@
 
 <script>
 import numberFormat from '@/helpers/numberFormat';
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   filters: {
@@ -51,18 +51,15 @@ export default {
         return this.item.amount;
       },
       set(value) {
-        this.$store.commit('updateCartProductAmout', { productId: this.item.productId, amount: value });
+        this.$store.dispatch('updateCartProductAmout', { productId: this.item.productId, amount: value });
       },
     },
   },
   methods: {
-    ...mapMutations({
-      deletProduct: 'deletCartProduct',
-    }),
-    // тут мы вызывваем мутацию из хранилица vuex и есть два варианта это написать!
-    // deletProduct(productId) {
-    //   this.$store.commit('deletCartProduct', productId);
-    // },
+    ...mapActions(['deleteProductCart']),
+    deleteProduct() {
+      this.deleteProductCart({ productId: this.item.productId });
+    },
   },
 };
 </script>
