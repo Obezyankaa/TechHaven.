@@ -285,8 +285,8 @@ a {
     font: inherit;
     background-color: transparent;
     -webkit-tap-highlight-color: transparent;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 .cart__block {
     background-color: #272727;

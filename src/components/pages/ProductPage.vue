@@ -68,14 +68,13 @@
                         <b class="item__price">
                             {{ product.price | numberFormat }} ₽
                         </b>
-
                         <fieldset class="form__block flexColor">
                             <legend class="form__legend">Цвет:</legend>
-                            <ul class="colors" v-for="(color) in product.color" :key="color.id">
+                            <ul class="colors" v-for="(color) in colorItem" :key="color.id">
                                 <li class="colors__item">
                                     <label class="colors__label">
-                                        <input class="colors__radio sr-only" type="radio" name="color-item" :value="color.index">
-                                        <span class="colors__value" :style="`background-color: rgb(${color});`" >
+                                        <input class="colors__radio sr-only" type="radio" name="color-item" :value="color.id">
+                                        <span class="colors__value" :style="`background-color: ${color}`" >
                                         </span>
                                     </label>
                                 </li>
@@ -113,11 +112,12 @@
                             </ul>
                         </fieldset>°
                         <div class="item__row">
-                            <div class="form__counter">
+                            <ButtonStore :onLogin="onLogin" :counter-btn.sync="productAmautCounter" />
+                            <!-- <div class="form__counter">
                                 <button class="form__btn" :disabled="isDisabled" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
                                 <input type="text" v-model.number="productAmautCounter">
                                 <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
-                            </div>
+                            </div> -->
                             <button class="button button--primery" type="submit" :disabled="productAddSending">
                                 В корзину
                             </button>
@@ -198,6 +198,7 @@ import numberFormat from '@/helpers/numberFormat';
 import axios from 'axios';
 import { API_URL } from '@/config';
 import { mapActions } from 'vuex';
+import ButtonStore from '../ButtonStore.vue';
 
 export default {
   data() {
@@ -215,24 +216,27 @@ export default {
     numberFormat,
   },
   components: {
-    HeaderVuePage, FooterVuePage,
+    HeaderVuePage, FooterVuePage, ButtonStore,
   },
   computed: {
     product() {
-    //   console.log(this.productData.image.file.name);
       return this.productData;
+    },
+    colorItem() {
+      const colorArr = this.productData.colors;
+      return colorArr.map((el) => el.code);
     },
     category() {
       return this.productData.category;
     },
-    isDisabled() {
-      const count = this.productAmautCounter;
-      let resultDisablerd;
-      if (count === 1) {
-        resultDisablerd = true;
-      }
-      return resultDisablerd;
-    },
+    // isDisabled() {
+    //   const count = this.productAmautCounter;
+    //   let resultDisablerd;
+    //   if (count === 1) {
+    //     resultDisablerd = true;
+    //   }
+    //   return resultDisablerd;
+    // },
   },
   methods: {
     ...mapActions(['addProductToCart']),
@@ -246,14 +250,19 @@ export default {
           this.productAddSending = false;
         });
     },
-    coutPlus() {
-      // eslint-disable-next-line no-return-assign
-      return this.productAmautCounter += 1;
+
+    onLogin(data) {
+      this.productAmautCounter = data;
+      console.log('data-->', this.productAmautCounter = data.countBtb);
     },
-    countMinus() {
-      // eslint-disable-next-line no-return-assign
-      return this.productAmautCounter -= 1;
-    },
+    // coutPlus() {
+    //   // eslint-disable-next-line no-return-assign
+    //   return this.productAmautCounter += 1;
+    // },
+    // countMinus() {
+    //   // eslint-disable-next-line no-return-assign
+    //   return this.productAmautCounter -= 1;
+    // },
     loadProduct() {
       this.productLoading = true;
       this.productError = false;
@@ -429,17 +438,6 @@ a {
 .button--second:not(:disabled):hover {
     background-color: #fff;
     color: #222
-}
-
-.button-del {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    background-color: transparent;
-    -webkit-tap-highlight-color: transparent;
-    width: 20px;
-    height: 20px
 }
 
 .form__block {

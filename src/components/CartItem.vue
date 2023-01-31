@@ -14,7 +14,7 @@
         <span class="product__code">
             артикул: {{ item.product.product.id }}
         </span>
-
+        <!-- <ButtonStore  :amount="amount" /> -->
         <div class="product__counter form__counter">
             <button type="button" aria-label="Убрать один товар">-</button>
             <input type="text" v-model.number="amount">
@@ -61,5 +61,13 @@ export default {
       this.deleteProductCart({ productId: this.item.productId });
     },
   },
+
 };
 </script>
+
+<style>
+button {
+    cursor: pointer;
+}
+
+</style>
