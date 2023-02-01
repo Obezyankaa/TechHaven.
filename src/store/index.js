@@ -93,7 +93,7 @@ export default new Vuex.Store({
     },
 
     updateCartProductAmout(context, { productId, amount }) {
-      context.commit('updateCartProductsData', { productId, amount });
+      context.commit('updateCartProductAmout', { productId, amount });
 
       if (amount < 1) {
         return;

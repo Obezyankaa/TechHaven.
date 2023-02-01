@@ -16,9 +16,9 @@
         </span>
         <!-- <ButtonStore  :amount="amount" /> -->
         <div class="product__counter form__counter">
-            <button type="button" aria-label="Убрать один товар">-</button>
+            <button type="button" aria-label="Убрать один товар" @click.prevent="minusCount()">-</button>
             <input type="text" v-model.number="amount">
-            <button type="button" aria-label="Добавить один товар">+</button>
+            <button type="button" aria-label="Добавить один товар" @click.prevent="plusCount()">+</button>
         </div>
 
         <b class="product__price">
@@ -59,6 +59,12 @@ export default {
     ...mapActions(['deleteProductCart']),
     deleteProduct() {
       this.deleteProductCart({ productId: this.item.productId });
+    },
+    plusCount() {
+      console.log(this.amount += 1);
+    },
+    minusCount() {
+      console.log(this.amount -= 1);
     },
   },
 
