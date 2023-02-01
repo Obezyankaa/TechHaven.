@@ -16,7 +16,7 @@
         </span>
         <!-- <ButtonStore  :amount="amount" /> -->
         <div class="product__counter form__counter">
-            <button type="button" aria-label="Убрать один товар" @click.prevent="minusCount()">-</button>
+            <button type="button" aria-label="Убрать один товар" :disabled="isDisabled" @click.prevent="minusCount()">-</button>
             <input type="text" v-model.number="amount">
             <button type="button" aria-label="Добавить один товар" @click.prevent="plusCount()">+</button>
         </div>
@@ -54,6 +54,15 @@ export default {
         this.$store.dispatch('updateCartProductAmout', { productId: this.item.productId, amount: value });
       },
     },
+    isDisabled() {
+      const count = this.amount;
+      console.log('count', count);
+      let resultDisablerd;
+      if (count === 1) {
+        resultDisablerd = true;
+      }
+      return resultDisablerd;
+    },
   },
   methods: {
     ...mapActions(['deleteProductCart']),
@@ -61,13 +70,16 @@ export default {
       this.deleteProductCart({ productId: this.item.productId });
     },
     plusCount() {
-      console.log(this.amount += 1);
+      // eslint-disable-next-line no-multi-assign
+      const a = this.amount += 1;
+      return a;
     },
     minusCount() {
-      console.log(this.amount -= 1);
+      // eslint-disable-next-line no-multi-assign
+      const a = this.amount -= 1;
+      return a;
     },
   },
-
 };
 </script>
 
