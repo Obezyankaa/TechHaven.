@@ -17,11 +17,6 @@
 </template>
 
 <style>
-/* div {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-} */
 
 #container {
     position: absolute;

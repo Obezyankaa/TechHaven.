@@ -56,7 +56,6 @@ export default {
     },
     isDisabled() {
       const count = this.amount;
-      console.log('count', count);
       let resultDisablerd;
       if (count === 1) {
         resultDisablerd = true;

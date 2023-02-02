@@ -41,15 +41,12 @@ export default {
   },
   methods: {
     paginate(page) {
-      console.log('paginate', page);
       this.$emit('paginate', page);
     },
     paginateForward(page) {
-      console.log('paginateForward', page);
       this.$emit('paginate', page + 1);
     },
     paginateBack(page) {
-      console.log('paginateBack', page);
       this.$emit('paginate', page - 1);
     },
   },

@@ -113,11 +113,6 @@
                         </fieldset>°
                         <div class="item__row">
                             <ButtonStore :onLogin="onLogin" :counter-btn.sync="productAmautCounter" />
-                            <!-- <div class="form__counter">
-                                <button class="form__btn" :disabled="isDisabled" type="button" aria-label="Убрать один товар" @click.prevent="countMinus(productAmaut)">-</button>
-                                <input type="text" v-model.number="productAmautCounter">
-                                <button class="form__btn" type="button" aria-label="Добавить один товар" @click.prevent="coutPlus(productAmaut)">+</button>
-                            </div> -->
                             <button class="button button--primery" type="submit" :disabled="productAddSending">
                                 В корзину
                             </button>
@@ -229,14 +224,6 @@ export default {
     category() {
       return this.productData.category;
     },
-    // isDisabled() {
-    //   const count = this.productAmautCounter;
-    //   let resultDisablerd;
-    //   if (count === 1) {
-    //     resultDisablerd = true;
-    //   }
-    //   return resultDisablerd;
-    // },
   },
   methods: {
     ...mapActions(['addProductToCart']),

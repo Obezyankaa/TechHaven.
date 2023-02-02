@@ -13,17 +13,37 @@
             8 800 600 90 09
         </a>
 
-      <cartIndicator />
+        <CatLoading v-if="loadingToggle" />
+        <div v-show="!loadingToggle">
+            <cartIndicator />
+        </div>
     </div>
 </header>
 </template>
 
 <script>
 import cartIndicator from '@/components/cartIndicator.vue';
+import CatLoading from './pages/CatLoading.vue';
 
 export default {
+  data() {
+    return {
+      loadingToggle: true,
+    };
+  },
   components: {
-    cartIndicator,
+    cartIndicator, CatLoading,
+  },
+  methods: {
+    LoadingBasketHeader() {
+      console.log(this.loadingToggle);
+      setTimeout(() => {
+        this.loadingToggle = false;
+      }, 1500);
+    },
+  },
+  created() {
+    this.LoadingBasketHeader();
   },
 };
 </script>

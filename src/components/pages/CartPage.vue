@@ -2,7 +2,7 @@
 <!-- eslint-disable max-len -->
 <template>
     <div>
-        <headerCarPage />
+    <headerCarPage />
     <div class="content container">
     <div class="content__top">
         <ul class="breadcrumbs">
@@ -30,8 +30,9 @@
     </div>
 
 <section class="cart">
-    <form class="cart__form form">
-        <div class="cart__field">
+  <LoadingVue v-if="productLoading" />
+    <form v-show="!productLoading" class="cart__form form">
+        <div class="cart__field" >
             <ul class="cart__list">
                 <CartItem v-for="item in products" :key="item.productId" :item="item" />
             </ul>
@@ -53,7 +54,6 @@
 </section>
 </div>
     <footerCarPage />
-
 </div>
 </template>
 
@@ -63,21 +63,35 @@ import footerCarPage from '@/components/Footer.vue';
 import numberFormat from '@/helpers/numberFormat';
 import { mapGetters } from 'vuex';
 import CartItem from '../CartItem.vue';
+import LoadingVue from './LoadingPage.vue';
 
 export default {
+  data() {
+    return {
+      productLoading: true,
+    };
+  },
   filters: {
     numberFormat,
   },
   components: {
-    headerCarPage, footerCarPage, CartItem,
+    headerCarPage, footerCarPage, CartItem, LoadingVue,
   },
   computed: {
     ...mapGetters(
       { products: 'cartDetailProducts', sumPrice: 'catrTotalPrice', conutPrice: 'counterPrice' },
     ),
-    // products() {
-    //   return this.$store.getters.cartDetailroduct;
-    // },
+  },
+  methods: {
+    LoadingBasket() {
+      console.log(this.productLoading);
+      setTimeout(() => {
+        this.productLoading = false;
+      }, 500);
+    },
+  },
+  created() {
+    this.LoadingBasket();
   },
 };
 
