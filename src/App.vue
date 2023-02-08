@@ -1,13 +1,21 @@
 <!-- eslint-disable max-len -->
 <template>
-  <router-view />
+  <div>
+    <HeaderVue />
+      <router-view />
+    <FooterVue />
+  </div>
 </template>
 
 <script>
 import { mapActions, mapMutations } from 'vuex';
+import HeaderVue from './components/Header.vue';
+import FooterVue from './components/Footer.vue';
 
 export default {
-
+  components: {
+    HeaderVue, FooterVue,
+  },
   created() {
     const userAccessKey = localStorage.getItem('userAccessKey');
     if (userAccessKey) {

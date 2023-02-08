@@ -16,7 +16,7 @@ export default {
 
 </script>
 
-<style>
+<!-- <style>
 .header__cart {
     position: relative;
     height: 27px;
@@ -34,4 +34,4 @@ export default {
     line-height: 1;
     color: #222
 }
-</style>
+</style> -->

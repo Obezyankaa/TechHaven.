@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style>
+<!-- <style>
 .catalog__pagination {
     display: flex;
     margin-top: auto
@@ -112,4 +112,4 @@ export default {
     opacity: .6;
     cursor: not-allowed
 }
-</style>
+</style> -->

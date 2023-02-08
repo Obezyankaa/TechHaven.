@@ -81,10 +81,3 @@ export default {
   },
 };
 </script>
-
-<style>
-button {
-    cursor: pointer;
-}
-
-</style>
