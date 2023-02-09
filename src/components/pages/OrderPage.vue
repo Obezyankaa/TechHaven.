@@ -5,14 +5,14 @@
     <div class="content__top">
         <ul class="breadcrumbs">
             <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="index.html">
+                <router-link class="breadcrumbs__link" :to="{ name: 'main'}">
                     Каталог
-                </a>
+                </router-link>
             </li>
             <li class="breadcrumbs__item">
-                <a class="breadcrumbs__link" href="cart.html">
+                <router-link class="breadcrumbs__link" :to="{ name: 'basket'}">
                     Корзина
-                </a>
+                </router-link>
             </li>
             <li class="breadcrumbs__item">
                 <a class="breadcrumbs__link">
@@ -25,7 +25,7 @@
             Корзина
         </h1>
         <span class="content__info">
-            3 товара
+            {{ conutPrice }} товара
         </span>
     </div>
 
@@ -104,26 +104,18 @@
 
             <div class="cart__block">
                 <ul class="cart__orders">
-                    <li class="cart__order">
-                        <h3>Смартфон Xiaomi Redmi Note 7 Pro 6/128GB</h3>
-                        <b>18 990 ₽</b>
-                        <span>Артикул: 150030</span>
-                    </li>
-                    <li class="cart__order">
-                        <h3>Гироскутер Razor Hovertrax 2.0ii</h3>
-                        <b>4 990 ₽</b>
-                        <span>Артикул: 150030</span>
-                    </li>
-                    <li class="cart__order">
-                        <h3>Электрический дрифт-карт Razor Lil’ Crazy</h3>
-                        <b>8 990 ₽</b>
-                        <span>Артикул: 150030</span>
+                    <li class="cart__order" v-for="item in products" :key="item.productId" :item="item">
+                        <h3>{{ item.product.product.title }}</h3>
+                        <b>{{ (item.amount * item.product.price) | numberFormat }} ₽</b>
+                        <span>Кол-во: {{ item.amount }}</span>
+                        <span>Aртикул: {{ item.product.product.id }}</span>
                     </li>
                 </ul>
 
                 <div class="cart__total">
-                    <p>Доставка: <b>500 ₽</b></p>
-                    <p>Итого: <b>3</b> товара на сумму <b>37 970 ₽</b></p>
+                    <p>Доставка: <b>700 ₽</b></p>
+                    <p>Итого: <b>{{ conutPrice }} товара,</b> товара на сумму <b><span>{{ sumPrice | numberFormat }} ₽</span></b></p>
+                    <!-- Итого: <span>{{ sumPrice | numberFormat }} ₽</span> -->
                 </div>
 
                 <button class="cart__button button button--primery" type="submit">
@@ -142,10 +134,20 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import numberFormat from '@/helpers/numberFormat';
 import BaseFormText from '../BaseFormText.vue';
 import BaseFormTextarial from '../BaseFormTextarial.vue';
 
 export default {
+  filters: {
+    numberFormat,
+  },
+  amount: {
+    get() {
+      return this.item.amount;
+    },
+  },
   data() {
     return {
       formData: {},
@@ -154,6 +156,11 @@ export default {
   },
   components: {
     BaseFormText, BaseFormTextarial,
+  },
+  computed: {
+    ...mapGetters(
+      { products: 'cartDetailProducts', sumPrice: 'catrTotalPrice', conutPrice: 'counterPrice' },
+    ),
   },
 };
 
