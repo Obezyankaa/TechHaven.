@@ -14,7 +14,13 @@ export default new Vuex.Store({
 
   userAccessKey: null,
   cartProductsData: [],
+  orderInfo: null,
+
   mutations: {
+
+    ubdeteOrderInfo(state, orderInfo) {
+      state.orderInfo = orderInfo;
+    },
     resetCart(state) {
       state.cartProducts = [];
       state.cartProductsData = [];
@@ -63,6 +69,16 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    loadOrderInfo(context, orderId) {
+      return axios.get(`${API_URL}/api/orders${orderId}`, {
+        params: {
+          userAccessKey: context.state.userAccessKey,
+        },
+      })
+        .then((response) => {
+          context.commit('ubdeteOrderInfo', response.data);
+        });
+    },
     loadCart(context) {
       return axios.get(`${API_URL}/api/baskets`, {
         params: {
