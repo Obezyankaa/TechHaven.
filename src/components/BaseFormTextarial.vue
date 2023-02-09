@@ -1,7 +1,7 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable max-len -->
 <template>
-    <BaseFormField :title="title" :error="errore">
+    <BaseFormField :title="title" :error="error">
         <textarea class="form__input form__input--area" v-model="dataValue" :placeholder="placeholder"></textarea>
     </BaseFormField>
 </template>

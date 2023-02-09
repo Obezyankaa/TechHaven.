@@ -15,23 +15,3 @@ export default {
 };
 
 </script>
-
-<!-- <style>
-.header__cart {
-    position: relative;
-    height: 27px;
-    color: #fff
-}
-
-.header__count {
-    position: absolute;
-    top: -5px;
-    right: -3px;
-    background-color: #9eff00;
-    padding: 3px;
-    font-family: "PressStart";
-    font-size: 7px;
-    line-height: 1;
-    color: #222
-}
-</style> -->

@@ -238,14 +238,6 @@ export default {
       this.productAmautCounter = data;
       console.log('data-->', this.productAmautCounter = data.countBtb);
     },
-    // coutPlus() {
-    //   // eslint-disable-next-line no-return-assign
-    //   return this.productAmautCounter += 1;
-    // },
-    // countMinus() {
-    //   // eslint-disable-next-line no-return-assign
-    //   return this.productAmautCounter -= 1;
-    // },
     loadProduct() {
       this.productLoading = true;
       this.productError = false;

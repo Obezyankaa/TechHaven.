@@ -80,7 +80,6 @@ export default {
   },
   methods: {
     LoadingBasket() {
-      console.log(this.productLoading);
       setTimeout(() => {
         this.productLoading = false;
       }, 500);

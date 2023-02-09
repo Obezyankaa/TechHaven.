@@ -30,33 +30,14 @@
     </div>
 
     <section class="cart">
-        <form class="cart__form form" action="#" method="POST">
+        <form class="cart__form form" action="#" method="POST" @submit.prevent="order">
             <div class="cart__field">
                 <div class="cart__data">
-                    <label class="form__label">
                         <BaseFormText title="ФИО" v-model="formData.name" :error="formError.name"  placeholder="Введите ваше полное имя" />
-                    </label>
-
-                    <label class="form__label">
-                        <input class="form__input" type="text" v-model="formData.address" name="address" placeholder="Введите ваш адрес">
-                        <span class="form__value">Адрес доставки</span>
-                        <span class="form__error" v-if="formError.address">{{ formEformError.address }}</span>
-                    </label>
-
-                    <label class="form__label">
-                        <input class="form__input" type="tel" v-model="formData.phoen" name="phone" placeholder="Введите ваш телефон">
-                        <span class="form__value">Телефон</span>
-                        <span class="form__error" v-if="formError.phone">{{ formError.phone }}</span>
-                    </label>
-
-                    <label class="form__label">
-                        <input class="form__input" type="email" v-model="formData.email" name="email" placeholder="Введи ваш Email">
-                        <span class="form__value">Email</span>
-                        <span class="form__error" v-if="formError.email">{{ formError.email }}</span>
-                    </label>
-
-                    <BaseFormTextarial title="Комментарий к заказу" v-model="formData.comments" :error="formError.comments" placeholder="Ваши пожелания" />
-
+                        <BaseFormText title="Адрес доставки" v-model="formData.address" :error="formError.address" placeholder="Введите ваш адрес" />
+                        <BaseFormText title="Телефон" v-model="formData.phone" :error="formError.phone" placeholder="Введите ваш телефон" />
+                        <BaseFormText title="Email" v-model="formData.email" :error="formError.email" placeholder="Введи ваш Email" />
+                        <BaseFormTextarial title="Комментарий к заказу" v-model="formData.comment" :error="formError.comments" placeholder="Ваши пожелания" />
                 </div>
 
                 <div class="cart__options">
@@ -101,7 +82,9 @@
                     </ul>
                 </div>
             </div>
-
+            <div class="cart__loading__cat" v-show="loadingCat">
+                <img src="../../../public/img/loadingCat/346.gif" alt="loadingCat">
+            </div>
             <div class="cart__block">
                 <ul class="cart__orders">
                     <li class="cart__order" v-for="item in products" :key="item.productId" :item="item">
@@ -122,10 +105,10 @@
                     Оформить заказ
                 </button>
             </div>
-            <div class="cart__error form__error-block">
+            <div class="cart__error form__error-block" v-if="formErrorMessage">
                 <h4>Заявка не отправлена!</h4>
                 <p>
-                    Похоже произошла ошибка. Попробуйте отправить снова или перезагрузите страницу.
+                    {{ formErrorMessage }}
                 </p>
             </div>
         </form>
@@ -136,6 +119,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import numberFormat from '@/helpers/numberFormat';
+import axios from 'axios';
+import { API_URL } from '@/config';
 import BaseFormText from '../BaseFormText.vue';
 import BaseFormTextarial from '../BaseFormTextarial.vue';
 
@@ -152,6 +137,8 @@ export default {
     return {
       formData: {},
       formError: {},
+      formErrorMessage: '',
+      loadingCat: false,
     };
   },
   components: {
@@ -161,6 +148,31 @@ export default {
     ...mapGetters(
       { products: 'cartDetailProducts', sumPrice: 'catrTotalPrice', conutPrice: 'counterPrice' },
     ),
+  },
+  methods: {
+    order() {
+      this.formError = {};
+      this.formErrorMessage = '';
+      this.loadingCat = true;
+      console.log('loadingCat--->', this.loadingCat);
+      setTimeout(() => {
+        axios.post(`${API_URL}/api/orders`, {
+          ...this.formData,
+        }, {
+          params: {
+            userAccessKey: this.$store.state.userAccessKey,
+          },
+        })
+          .then(() => {
+            this.$store.commit('resetCart');
+            this.loadingCat = false;
+          })
+          .catch((error) => {
+            this.formError = error.response.data.error.request || {};
+            this.formErrorMessage = error.response.data.error.message;
+          });
+      }, 2000);
+    },
   },
 };
 

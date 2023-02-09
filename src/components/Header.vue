@@ -36,7 +36,6 @@ export default {
   },
   methods: {
     LoadingBasketHeader() {
-      console.log(this.loadingToggle);
       setTimeout(() => {
         this.loadingToggle = false;
       }, 1500);
