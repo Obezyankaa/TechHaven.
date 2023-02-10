@@ -154,7 +154,6 @@ export default {
       this.formError = {};
       this.formErrorMessage = '';
       this.loadingCat = true;
-      console.log('loadingCat--->', this.loadingCat);
       setTimeout(() => {
         axios.post(`${API_URL}/api/orders`, {
           ...this.formData,

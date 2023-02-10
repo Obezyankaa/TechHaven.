@@ -15,7 +15,7 @@ const routes = [
   { name: 'notFaun', component: NotFaunPageVue, path: '*' },
   { name: 'basket', component: CartPage, path: '/basket' },
   { name: 'order', component: OrderPage, path: '/order' },
-  { name: 'orderInfo', component: OrderInfoPage, path: '/order/id' },
+  { name: 'orderInfo', component: OrderInfoPage, path: '/order/:id' },
 ];
 
 const router = new VueRouter({ routes });
