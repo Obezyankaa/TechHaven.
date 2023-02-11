@@ -173,7 +173,7 @@ export default {
             this.formError = error.response.data.error.request || {};
             this.formErrorMessage = error.response.data.error.message;
           });
-      }, 2000);
+      }, 2500);
     },
   },
 };

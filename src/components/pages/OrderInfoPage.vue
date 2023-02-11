@@ -21,13 +21,13 @@
         </ul>
 
         <h1 class="content__title">
-            Заказ оформлен <span>№ 23621</span>
+            Заказ оформлен <span>№ {{ orderNumber }}</span>
         </h1>
     </div>
 
     <section class="cart">
+        <h2 class="cart__heading content__title" v-if="!loading">Твой заказ загружается братан, ща сё будет 🤙 </h2>
         <div class="cart__loading" v-if="loading">
-        <!-- <h2>Ваши товары загружаются . . . </h2> -->
         <form class="cart__form form" action="#" method="POST">
             <div class="cart__field">
                 <p class="cart__message">
@@ -118,6 +118,9 @@ export default {
     order() {
       return this.$store.state.orderInfo;
     },
+    orderNumber() {
+      return this.$route.params.id;
+    },
   },
 
   methods: {
@@ -125,7 +128,7 @@ export default {
       setTimeout(() => {
         console.log(this.loading);
         this.loading = true;
-      }, 1500);
+      }, 2000);
     },
   },
 
@@ -138,3 +141,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.cart__heading {
+    font-size: 1rem;
+}
+</style>
