@@ -17,7 +17,6 @@ export default new Vuex.Store({
   orderInfo: null,
 
   mutations: {
-
     ubdeteOrderInfo(state, orderInfo) {
       state.orderInfo = orderInfo;
     },
